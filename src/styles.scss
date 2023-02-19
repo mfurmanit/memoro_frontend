@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@import 'src/assets/scss/variables.scss';
+
+@include mat.core();
+
+$my-app-theme: mat.define-light-theme(
+    (
+      color: (
+        primary: $my-app-primary,
+        accent: $my-app-accent,
+        warn: $my-app-warn,
+      ),
+    )
+);
+
+@include mat.all-component-themes($my-app-theme);
+
+// Bootstrap SASS utilities
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/variables';
+
+// Bootstrap SASS utility classes
+@import 'bootstrap/scss/utilities/spacing';
+@import 'bootstrap/scss/utilities/align';
+@import 'bootstrap/scss/utilities/display';
+@import 'bootstrap/scss/utilities/flex';
+@import 'bootstrap/scss/utilities/sizing';
+@import 'bootstrap/scss/utilities/text';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.pointer {
+  cursor: pointer;
+}
+
+.disable-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}

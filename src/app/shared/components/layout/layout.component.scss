@@ -1,0 +1,23 @@
+@use "@angular/material/theming" as mat;
+@import "src/assets/scss/variables";
+
+:host {
+  overflow: hidden;
+  height: 100vh;
+
+  main {
+    flex: 1;
+    position: relative;
+  }
+}
+
+.list-item-active {
+  background-color: mat.mat-color($my-app-primary, 50);
+  color: mat.mat-color($my-app-primary);
+}
+
+.router-container {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+}

@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+
+  main {
+    flex: 1;
+    position: relative;
+  }
+}
+
+.app-content {
+  min-height: 100vh;
+}
