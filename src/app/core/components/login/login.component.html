@@ -1,0 +1,15 @@
+<form>
+  <div class="form-outline mb-4">
+    <input type="email" id="username" class="form-control" #username/>
+    <label class="form-label" for="username">Nazwa użytkownika</label>
+  </div>
+
+  <div class="form-outline mb-4">
+    <input type="password" id="password" class="form-control" #password/>
+    <label class="form-label" for="password">Hasło</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block mb-4" (click)="onSubmit(username.value, password.value)">
+    Zaloguj się
+  </button>
+</form>
