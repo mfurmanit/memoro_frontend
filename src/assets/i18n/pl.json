@@ -1,4 +1,17 @@
 {
+  "titles": {
+    "main": "memoro",
+    "homePage": "strona główna",
+    "collections": "kolekcje",
+    "learning": "nauka",
+    "sharing": "udostępnianie",
+    "favorite": "ulubione",
+    "reports": "raporty",
+    "userPanel": "panel użytkownika"
+  },
+  "buttons": {
+    "logout": "wyloguj"
+  },
   "common": {
     "close": "zamknij"
   }

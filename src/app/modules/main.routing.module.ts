@@ -6,6 +6,26 @@ export const routes: Routes = [
   {
     path: 'home-page',
     loadChildren: () => import('./home-page/home-page.module').then(module => module.HomePageModule)
+  },
+  {
+    path: 'collections',
+    loadChildren: () => import('./collections/collections.module').then(module => module.CollectionsModule)
+  },
+  {
+    path: 'learning',
+    loadChildren: () => import('./learning/learning.module').then(module => module.LearningModule)
+  },
+  {
+    path: 'sharing',
+    loadChildren: () => import('./sharing/sharing.module').then(module => module.SharingModule)
+  },
+  {
+    path: 'favorite',
+    loadChildren: () => import('./favorite/favorite.module').then(module => module.FavoriteModule)
+  },
+  {
+    path: 'reports',
+    loadChildren: () => import('./reports/reports.module').then(module => module.ReportsModule)
   }
 ];
 

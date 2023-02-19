@@ -1,7 +1,10 @@
-import { LayoutComponent } from './layout/layout.component';
+import { LayoutComponent } from '@components/layout/layout.component';
+import { ToolbarComponent } from '@components/toolbar/toolbar.component';
 
 export const components = [
-  LayoutComponent
+  LayoutComponent,
+  ToolbarComponent
 ];
 
-export * from './layout/layout.component';
+export * from '@components/layout/layout.component';
+export * from '@components/toolbar/toolbar.component';

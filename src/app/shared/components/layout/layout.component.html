@@ -1,4 +1,29 @@
-<button mat-button color="primary" (click)="logout()">Wyloguj</button>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<app-toolbar (toggleSidenav)="drawer.toggle()"></app-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #drawer
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="(isHandset$ | async) === false">
+    <mat-nav-list>
+      <ng-container *ngFor="let element of menuElements">
+        <ng-container *ngIf="{ translated: (element.title | translate | capitalize) }; let title">
+          <mat-list-item appMenuItem
+                         [routerLink]="['/' + element.link]"
+                         [routerLinkActive]="'list-item-active'"
+                         [matTooltipDisabled]="title.translated.length < 15"
+                         [matTooltip]="title.translated">
+            <mat-icon matListIcon> {{ element.icon }} </mat-icon>
+            <span matLine> {{ title.translated }} </span>
+          </mat-list-item>
+        </ng-container>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <main class="router-container">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

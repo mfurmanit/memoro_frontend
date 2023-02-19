@@ -23,6 +23,9 @@
       "dom"
     ],
     "paths": {
+      "@models/*": [
+        "./src/app/core/models/*"
+      ],
       "@services/*": [
         "./src/app/core/services/*"
       ],

@@ -1,4 +1,5 @@
 import { upperCase, upperFirst } from 'lodash-es';
+import { TranslateService } from '@ngx-translate/core';
 
 export type UndefinedTypes = null | undefined;
 export type DefinedTypesOf<T> = T extends UndefinedTypes ? never : T;
@@ -17,4 +18,17 @@ export const titleCaseWord = (word: string): string => {
 export const titleUpperWord = (word: string): string => {
   if (!word) return word;
   return upperCase(word);
+};
+
+export const initTranslateService = (translate: TranslateService): void => {
+  const language = localStorage.getItem('language');
+  if (!isNullOrUndefined(language)) {
+    translate.setDefaultLang(language.toString());
+    translate.use(language.toString());
+  } else {
+    const lang = navigator.language && navigator.language.includes('pl') ? 'pl' : 'en';
+    translate.setDefaultLang(lang);
+    translate.use(lang);
+    localStorage.setItem('language', lang);
+  }
 };

@@ -1,5 +1,7 @@
+@use "@angular/material/theming" as mat;
+@import "src/assets/scss/variables";
+
 :host {
-  display: flex;
   overflow: hidden;
   height: 100vh;
 
@@ -7,4 +9,21 @@
     flex: 1;
     position: relative;
   }
+}
+
+:host ::ng-deep {
+  .layout-icon {
+    transform: scale(1.3);
+  }
+}
+
+.list-item-active {
+  background-color: mat.mat-color($my-app-primary, 50);
+  color: mat.mat-color($my-app-primary);
+}
+
+.router-container {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
 }

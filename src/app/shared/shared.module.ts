@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { ANGULAR_MATERIAL } from '@others/angular-material';
 
 import * as fromComponents from './components/index';
+import * as fromPipes from './pipes/index';
+import * as fromDirectives from './directives/index';
 
 @NgModule({
   imports: [
@@ -12,7 +15,8 @@ import * as fromComponents from './components/index';
     FormsModule,
     ReactiveFormsModule,
     ANGULAR_MATERIAL,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   exports: [
     FormsModule,
@@ -21,6 +25,8 @@ import * as fromComponents from './components/index';
   ],
   declarations: [
     fromComponents.components,
+    fromDirectives.directives,
+    fromPipes.pipes
   ],
 })
 export class SharedModule {
