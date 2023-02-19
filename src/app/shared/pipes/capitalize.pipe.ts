@@ -12,4 +12,3 @@ export class CapitalizePipe implements PipeTransform {
     else throw Error(`InvalidPipeArgument: '${value}' for pipe 'CapitalizePipe'`);
   }
 }
-

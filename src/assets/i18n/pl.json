@@ -10,9 +10,12 @@
     "userPanel": "panel użytkownika"
   },
   "buttons": {
-    "logout": "wyloguj"
+    "login": "zaloguj",
+    "logout": "wyloguj",
+    "close": "zamknij"
   },
   "common": {
-    "close": "zamknij"
+    "username": "nazwa użytkownika",
+    "password": "hasło"
   }
 }

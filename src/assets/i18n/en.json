@@ -1,5 +1,21 @@
 {
-  "common": {
+  "titles": {
+    "main": "memory",
+    "homePage": "home page",
+    "collections": "collections",
+    "learning": "learning",
+    "sharing": "sharing",
+    "favorite": "favourite",
+    "reports": "reports",
+    "userPanel": "user panel"
+  },
+  "buttons": {
+    "login": "login",
+    "logout": "logout",
     "close": "close"
+  },
+  "common": {
+    "username": "username",
+    "password": "password"
   }
 }

@@ -11,8 +11,8 @@ import { AuthenticationService } from '@services/authentication.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  redirectUrl: string | null = null;
 
+  redirectUrl: string | null = null;
   private readonly subscriptions = new Subscription();
 
   constructor(private formBuilder: FormBuilder,
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.resolveRedirectUrl();
   }
 
-  onSubmit(username: string, password: string): void {
+  login(username: string, password: string): void {
     this.authService.loginUser({username, password, redirectUrl: this.getRedirectUrl()});
   }
 

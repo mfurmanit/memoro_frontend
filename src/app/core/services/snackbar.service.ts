@@ -17,7 +17,7 @@ export class SnackbarService {
     const snackbarPosition: MatSnackBarConfig = {horizontalPosition: 'center', verticalPosition: 'bottom', panelClass};
     const snackBarRef = this.snackBar.open(
       titleCaseWord(translate ? this.translate.instant(message, interpolateObject) : message),
-      !autoClose ? titleUpperWord(this.translate.instant('common.close')) : '',
+      !autoClose ? titleUpperWord(this.translate.instant('buttons.close')) : '',
       autoClose ? {duration: 5000, ...snackbarPosition} : snackbarPosition
     );
     snackBarRef.onAction().subscribe(() => snackBarRef.dismiss());

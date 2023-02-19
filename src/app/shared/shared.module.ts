@@ -8,6 +8,7 @@ import { ANGULAR_MATERIAL } from '@others/angular-material';
 import * as fromComponents from './components/index';
 import * as fromPipes from './pipes/index';
 import * as fromDirectives from './directives/index';
+import { CapitalizePipe } from './pipes/index';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import * as fromDirectives from './directives/index';
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    ANGULAR_MATERIAL
+    ANGULAR_MATERIAL,
+    CapitalizePipe
   ],
   declarations: [
     fromComponents.components,
