@@ -1,4 +1,5 @@
 import { MenuElement } from '@models/menu-element';
+import { ConfirmationDialogData } from '@models/crud-dialog';
 
 export const menuElements: MenuElement[] = [
   {title: 'titles.homePage', link: 'home-page', icon: 'home'},
@@ -8,3 +9,12 @@ export const menuElements: MenuElement[] = [
   {title: 'titles.favorite', link: 'favorite', icon: 'hotel_class'},
   {title: 'titles.reports', link: 'reports', icon: 'insights'}
 ];
+
+export const defaultConfirmDialogSettings: ConfirmationDialogData = {
+  header: 'dialog.confirm',
+  content: '',
+  okButtonText: 'buttons.confirm',
+  declineButtonText: 'buttons.cancel',
+  disableClose: false,
+  width: undefined
+};

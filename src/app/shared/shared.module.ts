@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ANGULAR_MATERIAL } from '@others/angular-material';
 
 import * as fromComponents from './components/index';
+import * as fromDialogs from './dialogs/index';
 import * as fromPipes from './pipes/index';
 import * as fromDirectives from './directives/index';
 
@@ -20,14 +21,17 @@ import * as fromDirectives from './directives/index';
   ],
   exports: [
     FormsModule,
+    TranslateModule,
     ReactiveFormsModule,
     ANGULAR_MATERIAL,
     fromComponents.components,
+    fromDialogs.dialogs,
     fromDirectives.directives,
     fromPipes.pipes
   ],
   declarations: [
     fromComponents.components,
+    fromDialogs.dialogs,
     fromDirectives.directives,
     fromPipes.pipes
   ],

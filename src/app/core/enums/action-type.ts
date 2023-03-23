@@ -1,0 +1,9 @@
+export enum ActionType {
+  CREATE = 'CREATE',
+  DELETE = 'DELETE',
+  EDIT = 'EDIT',
+  MARK_AS_FAVORITE = 'MARK_AS_FAVORITE',
+  SHARE = 'SHARE',
+  LEARN = 'LEARN',
+  CREATE_CARD = 'CREATE_CARD'
+}

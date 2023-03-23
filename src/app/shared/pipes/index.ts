@@ -1,7 +1,10 @@
 import { CapitalizePipe } from './capitalize.pipe';
+import { MapPipe } from './map.pipe';
 
 export const pipes = [
-  CapitalizePipe
+  CapitalizePipe,
+  MapPipe
 ];
 
 export * from './capitalize.pipe';
+export * from './map.pipe';

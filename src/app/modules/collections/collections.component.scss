@@ -1,0 +1,59 @@
+:host ::ng-deep {
+  .mat-icon {
+    height: 1.1em;
+    width: 1.1em;
+    font-size: 1.3em;
+  }
+
+  .mat-list-base {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80vw;
+
+    & .mat-list-item.mat-list-item-with-avatar {
+      height: auto;
+      margin: 10px;
+      width: 100%;
+      border: 1px solid black;
+
+      & .mat-list-item-content {
+        height: 100%;
+        flex-direction: row;
+        text-align: center;
+        padding: 10px 10px;
+
+        & .mat-list-icon {
+          height: 1.1em;
+          width: 1.1em;
+          font-size: 1.3em;
+        }
+
+        & .mat-list-text {
+          padding: 0 10px;
+          font-size: 0.8rem;
+
+          & .size {
+            font-size: 0.6rem;
+          }
+        }
+      }
+
+      & .mat-line {
+        white-space: nowrap;
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .mat-card-title {
+    display: block;
+  }
+
+  .mat-line {
+    white-space: nowrap;
+    width: 90%;
+    margin: 0 auto;
+  }
+}

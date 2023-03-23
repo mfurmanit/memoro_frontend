@@ -12,10 +12,79 @@
   "buttons": {
     "login": "zaloguj",
     "logout": "wyloguj",
-    "close": "zamknij"
+    "close": "zamknij",
+    "save": "zapisz",
+    "cancel": "anuluj",
+    "confirm": "potwierdź",
+    "createCollection": "utwórz kolekcję"
   },
   "common": {
     "username": "nazwa użytkownika",
-    "password": "hasło"
+    "password": "hasło",
+    "name": "nazwa",
+    "icon": "ikona"
+  },
+  "actions": {
+    "CREATE": "utwórz",
+    "DELETE": "usuń",
+    "EDIT": "zmień",
+    "MARK_AS_FAVORITE": "oznacz jako ulubione",
+    "SHARE": "udostępnij",
+    "LEARN": "ucz się",
+    "CREATE_CARD": "utwórz kartę"
+  },
+  "validations": {
+    "required": "pole jest wymagane",
+    "min": "minimalna wartość wynosi {{min}}",
+    "max": "maksymalna wartość wynosi {{max}}",
+    "minlength": "minimalna ilość znaków wynosi {{requiredLength}}",
+    "maxlength": "maksymalna ilość znaków wynosi {{requiredLength}}",
+    "email": "wprowadzony adres e-mail jest nieprawidłowy"
+  },
+  "icons": {
+    "accessibility": "człowiek",
+    "account_balance": "bank",
+    "alarm": "alarm",
+    "album": "album",
+    "all_inclusive": "nieskończoność",
+    "assignment": "tablica",
+    "attachment": "załącznik",
+    "bluetooth": "bluetooth",
+    "book": "książka",
+    "bookmark_border": "zakładka",
+    "brush": "pędzel",
+    "build": "klucz",
+    "call": "telefon",
+    "camera_alt": "aparat",
+    "chat_bubble_outline": "chat",
+    "cloud_queue": "chmura",
+    "computer": "komputer",
+    "directions_car": "samochód",
+    "flag": "flaga",
+    "flight": "samolot",
+    "folder_open": "folder",
+    "grade": "gwiazda",
+    "home": "dom",
+    "language": "język",
+    "people": "ludzie",
+    "school": "szkoła",
+    "search": "lupa",
+    "security": "tarcza",
+    "settings": "koło zębate",
+    "warning": "ostrzeżenie"
+  },
+  "collections": {
+    "dialog": {
+      "create": "tworzenie kolekcji",
+      "edit": "edycja kolekcji",
+      "deleteHeader": "usuwanie kolekcji",
+      "deleteMessage": "czy na pewno chcesz usunąć wskazaną kolekcję?"
+    },
+    "actions": {
+      "CREATE": "kolekcja została utworzona pomyślnie",
+      "EDIT": "kolekcja została zaktualizowana pomyślnie",
+      "DELETE": "kolekcja została usunięta pomyślnie",
+      "MARK_COLLECTION_AS_FAVORITE": "kolekcja została oznaczona jako ulubiona"
+    }
   }
 }
