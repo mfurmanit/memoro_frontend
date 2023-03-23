@@ -1,0 +1,19 @@
+<div class="dialog" [style.width]="data.width">
+  <button class="dialog__cancel" [mat-dialog-close]="false" *ngIf="!data.disableClose">
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-dialog-content>
+    <h4 class="dialog__action">{{ data.header | translate | capitalize }}</h4>
+    <span class="dialog__description text-justify">{{ data.content | translate | capitalize }}</span>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="d-flex w-100">
+      <button class="m-1" mat-raised-button color="primary" *ngIf="data.okButtonText" (click)="dialogRef.close(true);">
+        {{ data.okButtonText | translate | uppercase }}
+      </button>
+      <button class="m-1" mat-button *ngIf="data.declineButtonText" (click)="dialogRef.close(false);">
+        {{ data.declineButtonText | translate | uppercase }}
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>

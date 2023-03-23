@@ -32,3 +32,12 @@ export const initTranslateService = (translate: TranslateService): void => {
     localStorage.setItem('language', lang);
   }
 };
+
+export const getCurrentLang = (): string | null => {
+  const language = localStorage.getItem('language');
+  return !isNullOrUndefined(language) ? language : 'pl';
+};
+
+export function getProperty<Type, Key extends keyof Type>(object: Type, key: Key) {
+  return object[key];
+}

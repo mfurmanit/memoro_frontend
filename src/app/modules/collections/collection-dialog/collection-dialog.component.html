@@ -1,0 +1,48 @@
+<form novalidate autocomplete="off" [formGroup]="form" *ngIf="form">
+  <div class="dialog">
+    <h2 mat-dialog-title>{{ 'collections.dialog.' + (editMode ? 'edit' : 'create') | translate | capitalize }}</h2>
+    <mat-dialog-content>
+
+      <app-input [form]="form" [controlName]="'name'" [placeholder]="'common.name'">
+      </app-input>
+
+      <app-select [form]="form"
+                  [controlName]="'icon'"
+                  [values]="icons"
+                  [displayFnName]="'simpleValue'"
+                  [template]="iconTypeTemplate"
+                  [triggerTemplate]="iconTypeTriggerTemplate"
+                  [placeholder]="'common.icon'">
+    </app-select>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="d-flex justify-content-end">
+      <button role="button" mat-button type="submit" id="cancelButton" [mat-dialog-close]="null">
+        {{ 'buttons.cancel'| translate | capitalize }}
+      </button>
+      <button role="button"
+              mat-raised-button
+              color="primary"
+              type="button"
+              id="saveUserButton"
+              [disabled]="form.invalid"
+              (click)="closeDialog()">
+        {{ 'buttons.save' | translate | capitalize }}
+      </button>
+    </mat-dialog-actions>
+  </div>
+</form>
+
+<ng-template #iconTypeTemplate let-value="value">
+  <ng-container *ngIf="value">
+    <mat-icon>{{ value }}</mat-icon>
+    <span>{{ ('icons.' + value) | translate | capitalize }}</span>
+  </ng-container>
+</ng-template>
+
+<ng-template #iconTypeTriggerTemplate let-value="value">
+  <div *ngIf="value" class="d-flex align-items-center">
+    <mat-icon class="mr-2 ml-1">{{value}}</mat-icon>
+    <span>{{('icons.' + value) | translate | capitalize}}</span>
+  </div>
+</ng-template>

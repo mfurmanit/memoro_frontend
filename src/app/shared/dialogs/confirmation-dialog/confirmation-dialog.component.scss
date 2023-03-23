@@ -1,0 +1,29 @@
+@import 'src/assets/scss/variables.scss';
+
+.dialog {
+  padding: 1rem;
+  max-width: 450px;
+  width: 95vw;
+  position: relative;
+
+  &__cancel {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background: transparent;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__action {
+    font-size: 1.5rem;
+  }
+
+  &__description {
+    display: block;
+    padding: 1rem 0;
+  }
+}
