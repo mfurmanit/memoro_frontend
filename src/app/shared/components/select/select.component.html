@@ -1,0 +1,26 @@
+<mat-form-field [formGroup]="form" class="w-100">
+  <mat-label>{{placeholder | translate | capitalize}}</mat-label>
+  <mat-select #matSelect
+              (selectionChange)="selectionChanged.emit($event)"
+              [formControlName]="controlName"
+              [id]="controlName"
+              [multiple]="multiple"
+              [compareWith]="comparator">
+    <mat-select-trigger *ngIf="triggerTemplate">
+      <ng-template [ngTemplateOutlet]="triggerTemplate"
+                   [ngTemplateOutletContext]="{value: matSelect?.value | map:displayFnName}"></ng-template>
+    </mat-select-trigger>
+    <mat-option *ngFor="let value of values" [value]="value">
+      <ng-container *ngIf="!template">{{value | map:displayFnName}}</ng-container>
+      <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{value: value | map:displayFnName}"></ng-template>
+    </mat-option>
+  </mat-select>
+  <mat-error>
+    <app-input-errors [errors]="form.controls[controlName].errors"></app-input-errors>
+  </mat-error>
+  <mat-hint *ngIf="info" align="end" class="d-flex align-middle align-items-center">
+    <mat-icon [matTooltip]="info | translate | capitalize" [matTooltipClass]="'text-center'" color="primary" class="help">
+      help_outline
+    </mat-icon>
+  </mat-hint>
+</mat-form-field>
