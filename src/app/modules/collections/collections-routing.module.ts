@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CollectionsComponent } from './collections.component';
+import { CollectionsPageComponent } from './collections-page/collections-page.component';
 import { CommonModule } from '@angular/common';
+import { CardsPageComponent } from './cards-page/cards-page.component';
 
 const routes: Routes = [
-  {path: '', component: CollectionsComponent}
+  {path: '', component: CollectionsPageComponent},
+  {
+    path: ':id/cards',
+    component: CardsPageComponent
+  },
 ];
 
 @NgModule({

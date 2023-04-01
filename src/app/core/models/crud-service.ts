@@ -5,8 +5,6 @@ import { Page } from '@models/page';
 export interface CrudService<T> {
   getAll(params?: HttpParams): Observable<Page<T>>;
 
-  getAllAsList(params?: HttpParams): Observable<T[]>;
-
   create(data: T): Observable<T>;
 
   update(id: string, data: T): Observable<T>;

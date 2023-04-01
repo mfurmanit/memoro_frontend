@@ -1,0 +1,66 @@
+<div class="d-flex flex-column main-container">
+  <div class="d-flex flex-direction-row w-100">
+    <button class="flex-element flex-button" role="button" mat-raised-button color="primary" (click)="create()">
+      {{ 'buttons.createCollection' | translate | capitalize }}
+    </button>
+
+    <ng-container *ngIf="form">
+      <app-input class="flex-element"
+                 [hideCounter]="true"
+                 [form]="form"
+                 [controlName]="'value'"
+                 [placeholder]="'common.value'"
+                 [appearance]="'outline'">
+      </app-input>
+
+      <app-select class="flex-element"
+                  [form]="form"
+                  [controlName]="'sort'"
+                  [values]="sortTypes"
+                  [displayFnName]="'sortType'"
+                  [placeholder]="'common.sort'"
+                  [appearance]="'outline'">
+      </app-select>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="(collections$ | async) as page">
+    <ng-container *ngIf="page?.content as collections">
+      <mat-nav-list *ngIf="(collections || []).length > 0">
+        <ng-container *ngFor="let element of $any(collections)">
+          <div class="d-flex flex-row list-item-container">
+            <mat-list-item (click)="navigate(element)">
+              <mat-icon matListIcon> {{ element?.icon }} </mat-icon>
+              <span matLine> {{ element.name}} </span>
+              <span matLine class="size"> {{ element.size}} </span>
+            </mat-list-item>
+
+            <div class="d-flex m-2 align-items-center">
+              <mat-icon matSuffix class="pointer" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{collection: element}">
+                settings
+              </mat-icon>
+            </div>
+          </div>
+        </ng-container>
+      </mat-nav-list>
+
+      <mat-paginator [pageSize]="pageSize"
+                     [pageIndex]="pageIndex"
+                     [pageSizeOptions]="pageSizeOptions"
+                     [length]="page.totalElements"
+                     (page)="onPageChanged($event)">
+      </mat-paginator>
+    </ng-container>
+  </ng-container>
+</div>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-collection="collection">
+    <ng-container *ngFor="let action of actions">
+      <button mat-menu-item (click)="actionClicked(action, collection)">
+        <mat-icon>{{ action.icon }}</mat-icon>
+        <span>{{ ('actions.' + action.type) | translate | capitalize }}</span>
+      </button>
+    </ng-container>
+  </ng-template>
+</mat-menu>

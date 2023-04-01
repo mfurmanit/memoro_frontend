@@ -29,8 +29,4 @@ export class CardCollectionService implements CrudService<CardCollection> {
   getAll(params?: HttpParams): Observable<Page<CardCollection>> {
     return this.http.get<Page<CardCollection>>(`${this.url}`, {params});
   }
-
-  getAllAsList(params?: HttpParams): Observable<CardCollection[]> {
-    throw new Error('Not implemented');
-  }
 }

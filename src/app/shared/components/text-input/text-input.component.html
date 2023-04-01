@@ -1,0 +1,16 @@
+<ng-container [formGroup]="form">
+  <mat-form-field class="w-100">
+    <mat-label>{{placeholder | translate | capitalize}}</mat-label>
+    <textarea #input
+              matInput
+              [formControlName]="controlName"
+              [name]="controlName"
+              [maxlength]="maxlength"
+              [rows]="rows"
+              [placeholder]="placeholder | translate | capitalize"></textarea>
+    <mat-hint *ngIf="maxlength" align="end">{{input.value.length || 0}}/{{maxlength}}</mat-hint>
+    <mat-error>
+      <app-input-errors [errors]="form.controls[controlName].errors"></app-input-errors>
+    </mat-error>
+  </mat-form-field>
+</ng-container>

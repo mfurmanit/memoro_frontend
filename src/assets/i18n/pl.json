@@ -16,13 +16,21 @@
     "save": "zapisz",
     "cancel": "anuluj",
     "confirm": "potwierdź",
-    "createCollection": "utwórz kolekcję"
+    "createCollection": "utwórz kolekcję",
+    "createCard": "utwórz kartę"
   },
   "common": {
     "username": "nazwa użytkownika",
     "password": "hasło",
     "name": "nazwa",
-    "icon": "ikona"
+    "icon": "ikona",
+    "front": "przód",
+    "back": "tył",
+    "favorite": "ulubiona",
+    "collection": "kolekcja",
+    "value": "wartość",
+    "sort": "sortowanie",
+    "side": "strona filtrowania"
   },
   "actions": {
     "CREATE": "utwórz",
@@ -83,8 +91,36 @@
     "actions": {
       "CREATE": "kolekcja została utworzona pomyślnie",
       "EDIT": "kolekcja została zaktualizowana pomyślnie",
-      "DELETE": "kolekcja została usunięta pomyślnie",
-      "MARK_COLLECTION_AS_FAVORITE": "kolekcja została oznaczona jako ulubiona"
+      "DELETE": "kolekcja została usunięta pomyślnie"
     }
+  },
+  "cards": {
+    "dialog": {
+      "create": "tworzenie karty",
+      "edit": "edycja karty",
+      "deleteHeader": "usuwanie karty",
+      "deleteMessage": "czy na pewno chcesz usunąć wskazaną kartę?"
+    },
+    "actions": {
+      "CREATE": "karta została utworzona pomyślnie",
+      "EDIT": "karta została zaktualizowana pomyślnie",
+      "DELETE": "karta została usunięta pomyślnie",
+      "MARK_AS_FAVORITE": "karta została oznaczona jako ulubiona"
+    }
+  },
+  "sortTypes": {
+    "NONE": "Wyłączone",
+    "NAME_ASC": "Po nazwie (rosnąco)",
+    "NAME_DESC": "Po nazwie (malejąco)",
+    "CREATED_DATE_ASC": "Po dacie utworzenia (rosnąco)",
+    "CREATED_DATE_DESC": "Po dacie utworzenia (malejąco)",
+    "FRONT_ASC": "Po przodzie (rosnąco)",
+    "FRONT_DESC": "Po przodzie (malejąco)",
+    "BACK_ASC": "Po tyle (rosnąco)",
+    "BACK_DESC": "Po tyle (malejąco)"
+  },
+  "sides": {
+    "FRONT": "Przód",
+    "BACK": "Tył"
   }
 }
