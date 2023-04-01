@@ -21,6 +21,8 @@ import { isNullOrUndefined } from '@others/helper-functions';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { collectionsActions, collectionsSortTypes } from '@others/constants';
 
+// TODO: Extract shared logic to separate component
+
 @Component({
   selector: 'app-collections',
   templateUrl: './collections-page.component.html',

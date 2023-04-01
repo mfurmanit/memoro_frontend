@@ -33,8 +33,4 @@ export class CardService implements CrudService<Card> {
   getAll(params: HttpParams): Observable<Page<Card>> {
     return this.http.get<Page<Card>>(`/api/card-collections/${params.get('id')}/cards`, {params});
   }
-
-  getAllById(id: string): Observable<Card[]> {
-    return this.http.get<Card[]>(`/api/card-collections/${id}/cards`);
-  }
 }
