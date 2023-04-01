@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Required } from '../../decorators/required.decorator';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-input',
@@ -9,6 +10,7 @@ import { Required } from '../../decorators/required.decorator';
 })
 export class InputComponent {
   @Input() id?: string;
+  @Input() appearance: MatFormFieldAppearance = 'standard';
   @Input() info?: string;
   @Input() @Required placeholder!: string;
   @Input() @Required form!: FormGroup;
@@ -18,6 +20,7 @@ export class InputComponent {
   @Input() maxlength: string | number = 255;
   @Input() minlength: string | number | null = null;
   @Input() readonly: boolean = false;
+  @Input() hideCounter: boolean = false;
   @Input() translatePlaceholder: boolean = true;
   @Input() interpolateParams?: Record<string, string | number>;
   @Input() fieldClass?: string | string[] | Set<string> | {

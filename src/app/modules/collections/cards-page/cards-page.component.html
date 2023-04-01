@@ -1,0 +1,76 @@
+<div class="d-flex flex-column main-container">
+  <div class="d-flex flex-direction-row w-100">
+    <button class="flex-element flex-button" role="button" mat-raised-button color="primary" (click)="create()">
+      {{ 'buttons.createCard' | translate | capitalize }}
+    </button>
+
+    <ng-container *ngIf="form">
+      <app-select class="flex-element"
+                  [form]="form"
+                  [controlName]="'side'"
+                  [values]="sides"
+                  [displayFnName]="'side'"
+                  [placeholder]="'common.side'"
+                  [appearance]="'outline'">
+      </app-select>
+
+      <app-input class="flex-element"
+                 [hideCounter]="true"
+                 [form]="form"
+                 [controlName]="'value'"
+                 [placeholder]="'common.value'"
+                 [appearance]="'outline'">
+      </app-input>
+
+
+      <app-select class="flex-element"
+                  [form]="form"
+                  [controlName]="'sort'"
+                  [values]="sortTypes"
+                  [displayFnName]="'sortType'"
+                  [placeholder]="'common.sort'"
+                  [appearance]="'outline'">
+      </app-select>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="(cards$ | async) as page">
+    <ng-container *ngIf="page?.content as cards">
+      <mat-nav-list [disableRipple]="true" *ngIf="(cards || []).length > 0">
+        <ng-container *ngFor="let element of $any(cards)">
+          <div class="d-flex flex-row list-item-container">
+            <mat-list-item  >
+              <mat-icon matListIcon> {{element.favorite ? 'favorite' : 'favorite_border'}} </mat-icon>
+              <span matLine> {{ element.front }} </span>
+              <span matLine class="size"> {{ element.back }} </span>
+            </mat-list-item>
+
+            <div class="d-flex m-2 align-items-center">
+              <mat-icon matSuffix class="pointer" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{collection: element}">
+                settings
+              </mat-icon>
+            </div>
+          </div>
+        </ng-container>
+      </mat-nav-list>
+
+      <mat-paginator [pageSize]="pageSize"
+                     [pageIndex]="pageIndex"
+                     [pageSizeOptions]="pageSizeOptions"
+                     [length]="page.totalElements"
+                     (page)="onPageChanged($event)">
+      </mat-paginator>
+    </ng-container>
+  </ng-container>
+</div>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-collection="collection">
+    <ng-container *ngFor="let action of actions">
+      <button mat-menu-item (click)="actionClicked(action, collection)">
+        <mat-icon>{{ action.icon }}</mat-icon>
+        <span>{{ ('actions.' + action.type) | translate | capitalize }}</span>
+      </button>
+    </ng-container>
+  </ng-template>
+</mat-menu>

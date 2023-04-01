@@ -4,4 +4,5 @@ export interface Card extends BaseModel {
   front: string;
   back: string;
   favorite: boolean;
+  collectionId: string;
 }

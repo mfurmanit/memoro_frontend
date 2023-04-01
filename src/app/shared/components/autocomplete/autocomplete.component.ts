@@ -19,7 +19,6 @@ export class AutocompleteComponent<T> extends SelectComponent<T> implements OnIn
   filteredOptions?: Observable<T[]>;
   displayFn: (value: T) => string = (value) => `${value}`;
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   constructor(protected mappingService: MappingService) {
     super();
   }

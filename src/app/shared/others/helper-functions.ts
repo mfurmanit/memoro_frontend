@@ -41,3 +41,7 @@ export const getCurrentLang = (): string | null => {
 export function getProperty<Type, Key extends keyof Type>(object: Type, key: Key) {
   return object[key];
 }
+
+export function isAssignable<Type>(object: Type, property: string): object is Type {
+  return property in object;
+}
