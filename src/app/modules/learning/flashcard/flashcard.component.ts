@@ -25,14 +25,14 @@ export class FlashcardComponent extends BaseComponent implements OnInit {
   }
 
   listenForActive(): void {
-    this.subscriptions.add(this.stateService.activeChanged.asObservable().subscribe(
-      a => this.isActive = a
-    ))
+    this.subscriptions.add(
+      this.stateService.activeChanged.asObservable()
+        .subscribe(isActive => this.isActive = isActive)
+    );
   }
 
   rotateCard(): void {
     const stopRotation = this.isActive && this.mode === LearningMode.LEARNING;
-    console.log(stopRotation);
     if (!stopRotation) {
       this.isActive = !this.isActive;
       this.stateService.activeChanged.next(this.isActive);

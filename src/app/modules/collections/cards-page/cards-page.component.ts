@@ -179,11 +179,6 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
     else return null;
   }
 
-  private getOnlyFavorites(): boolean {
-    if (!isNullOrUndefined(this.form)) return this.form.controls['onlyFavorites'].value;
-    else return false;
-  }
-
   protected getActionPrefix(): string {
     return 'cards.actions';
   }

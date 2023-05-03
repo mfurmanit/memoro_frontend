@@ -1,15 +1,13 @@
 .center {
-  width: 90%; /* Set width of center element */
-  flex: 1; /* Allow center element to grow and fill available space */
+  width: 90%;
+  flex: 1;
 }
 
-.left,
-.right {
-  width: 5%; /* Set width of left and right elements */
-  flex: 1; /* Allow left and right elements to grow and fill available space */
+.left, .right {
+  width: 5%;
+  flex: 1;
 }
 
-/* Center items horizontally within each child element */
 .center, .left, .right {
   display: flex;
   justify-content: center;

@@ -9,7 +9,6 @@
       {{ 'buttons.learn' | translate | capitalize }}
     </button>
 
-    <!--                        [ngClass]="{'selected': form.controls['collection'].value != null && form.controls['collection'].value != ''}"-->
     <ng-container *ngIf="form">
       <app-autocomplete class="flex-element"
                         [form]="form"
@@ -17,7 +16,8 @@
                         [displayFnName]="'collection'"
                         [asyncValuesFetch]="getCollections"
                         [placeholder]="'common.collection'"
-                        [distinct]="false"></app-autocomplete>
+                        [distinct]="false">
+      </app-autocomplete>
 
       <app-select class="flex-element"
                   [form]="form"

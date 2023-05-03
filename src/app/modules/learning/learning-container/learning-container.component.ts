@@ -23,13 +23,12 @@ export class LearningContainerComponent extends BaseComponent {
   state$: Observable<boolean>;
 
   readonly mode: LearningMode = LearningMode.LEARNING;
-
   readonly answers: Answer[] = Object.values(Answer);
 
   constructor(private service: LearningService,
               private stateService: StateService) {
     super();
-   this.state$ = this.stateService.activeChanged.asObservable().pipe(share());
+    this.state$ = this.stateService.activeChanged.asObservable().pipe(share());
   }
 
   answerCard(cardId: string, answer: Answer): void {

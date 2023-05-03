@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LearningMode } from '@enums/learning-mode';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ import { LearningService } from '@services/learning.service';
   templateUrl: './learning-page.component.html',
   styleUrls: ['./learning-page.component.scss']
 })
-export class LearningPageComponent extends BaseComponent implements OnInit, OnDestroy {
+export class LearningPageComponent extends BaseComponent implements OnInit {
 
   form: FormGroup | null = null;
   collectionId: string | null = null;
@@ -38,12 +38,6 @@ export class LearningPageComponent extends BaseComponent implements OnInit, OnDe
     this.initForm();
     this.initListeners();
     this.getCollections = this.getCollections.bind(this);
-  }
-
-  override ngOnDestroy(): void {
-    super.ngOnDestroy();
-    if (this.mode === LearningMode.LEARNING)
-      this.subscriptions.add(this.learningService.stop().subscribe());
   }
 
   startLearning(): void {
@@ -72,22 +66,27 @@ export class LearningPageComponent extends BaseComponent implements OnInit, OnDe
     });
   }
 
+  private listenForCollectionChanges(): void {
+    this.subscriptions.add(
+      this.getCollectionObservable().subscribe(collection => {
+        if (isCardCollection(collection)) {
+          this.collectionId = collection.id;
+          if (this.mode !== LearningMode.LEARNING) this.changeState(this.getSort());
+        } else this.collectionId = null;
+      })
+    );
+  }
+
+  private listenForSortChanges(): void {
+    this.subscriptions.add(
+      this.getSortObservable().subscribe(sort => this.changeState(sort))
+    );
+  }
+
   private initListeners(): void {
     if (!isNullOrUndefined(this.form)) {
-      this.subscriptions.add(
-        this.getCollectionObservable()
-          .subscribe(collection => {
-            if (isCardCollection(collection)) {
-              this.collectionId = collection.id;
-              if (this.mode !== LearningMode.LEARNING) this.changeState(this.getSort());
-            } else this.collectionId = null;
-          }));
-
-
-      this.subscriptions.add(
-        this.getSortObservable()
-          .subscribe(sort => this.changeState(sort))
-      );
+      this.listenForCollectionChanges();
+      this.listenForSortChanges();
     }
   }
 
@@ -105,9 +104,9 @@ export class LearningPageComponent extends BaseComponent implements OnInit, OnDe
   }
 
   private changeState(sort: SortType = SortType.NONE): void {
-    if (this.mode === LearningMode.LEARNING) {
+    if (this.mode === LearningMode.LEARNING)
       this.subscriptions.add(this.learningService.stop().subscribe(() => this.updateState(sort)));
-    } else this.updateState(sort);
+    else this.updateState(sort);
   }
 
   private updateState(sort: SortType = SortType.NONE): void {

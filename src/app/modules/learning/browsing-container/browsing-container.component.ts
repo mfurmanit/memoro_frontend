@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
-import { emptyPage, Page } from '@models/page';
+import { Component, Input, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { Card } from '@models/card';
 import { LearningMode } from '@enums/learning-mode';
 import { CardService } from '@services/card.service';
@@ -16,7 +15,7 @@ import { StateService } from '@services/state.service';
   templateUrl: './browsing-container.component.html',
   styleUrls: ['./browsing-container.component.scss']
 })
-export class BrowsingContainerComponent extends BaseComponent {
+export class BrowsingContainerComponent extends BaseComponent implements OnInit {
 
   @Input() set state(state: BrowsingState | undefined) {
     if (!isNullOrUndefined(state)) {
@@ -26,63 +25,30 @@ export class BrowsingContainerComponent extends BaseComponent {
     }
   };
 
-  currentState: BrowsingState | undefined;
   cards: Card[] = [];
   cardNumber: number = 0;
-  isActive: boolean = false;
-  pages: number = 0; // TODO replace with one object maybe ?
+  pages: number = 0;
 
-  cards$: Observable<Page<Card>> = of(emptyPage<Card>());
+  isActive: boolean = false;
+  currentState: BrowsingState | undefined;
+
   readonly mode: LearningMode = LearningMode.BROWSING;
   readonly pageSize: number = 20;
 
   constructor(private service: CardService,
               private stateService: StateService) {
     super();
+  }
+
+  ngOnInit(): void {
     this.listenForActive();
   }
 
-  private loadCards(): Observable<Card[]> {
-    let params = new HttpParams()
-      .set('page', this.pages)
-      .set('size', '20');
-
-    if (!isNullOrUndefined(this.currentState)) {
-      console.log(this.currentState);
-      params = params.append('id', this.currentState.collectionId);
-      params = this.applySort(this.currentState.sort, params);
-    }
-
-    return this.service.getAll(params).pipe(map(page => page.content));
-  }
-
-  private reloadCards(): void {
-    this.cards = [];
-    this.appendCards();
-  }
-
-  private appendCards(): void {
-    this.subscriptions.add(this.loadCards().subscribe(cards => this.cards = cards));
-  }
-
   listenForActive(): void {
-    this.subscriptions.add(this.stateService.activeChanged.asObservable().subscribe(
-      a => this.isActive = a
-    ))
-  }
-
-  private applySort(sortType: SortType = SortType.NONE, params: HttpParams): HttpParams {
-    if (sortType !== SortType.NONE) {
-      const sortTypeString = sortType.toString();
-      const underscoreIndex = sortTypeString.lastIndexOf('_');
-      const beforeUnderscore = sortTypeString.substring(0, underscoreIndex);
-      const sortParameter = beforeUnderscore.toLowerCase().replace(
-        /_(\w)/g, (match, letter) => letter.toUpperCase()
-      );
-      const sortDirection = sortTypeString.substring(underscoreIndex + 1);
-      params = params.set('sort', sortParameter + ',' + sortDirection);
-    }
-    return params;
+    this.subscriptions.add(
+      this.stateService.activeChanged.asObservable()
+        .subscribe(isActive => this.isActive = isActive)
+    );
   }
 
   decrement(): void {
@@ -98,6 +64,42 @@ export class BrowsingContainerComponent extends BaseComponent {
       setTimeout(() => this.cardNumber++, 150);
     } else this.cardNumber++;
     this.checkPage();
+  }
+
+  private loadCards(): Observable<Card[]> {
+    let params = new HttpParams()
+      .set('page', this.pages)
+      .set('size', '20');
+
+    if (!isNullOrUndefined(this.currentState)) {
+      params = params.append('id', this.currentState.collectionId);
+      params = this.applySort(this.currentState.sort, params);
+    }
+
+    return this.service.getAll(params).pipe(map(page => page.content));
+  }
+
+  private reloadCards(): void {
+    this.cards = [];
+    this.appendCards();
+  }
+
+  private appendCards(): void {
+    this.subscriptions.add(this.loadCards().subscribe(cards => this.cards.push(...cards)));
+  }
+
+  private applySort(sortType: SortType = SortType.NONE, params: HttpParams): HttpParams {
+    if (sortType !== SortType.NONE) {
+      const sortTypeString = sortType.toString();
+      const underscoreIndex = sortTypeString.lastIndexOf('_');
+      const beforeUnderscore = sortTypeString.substring(0, underscoreIndex);
+      const sortParameter = beforeUnderscore.toLowerCase().replace(
+        /_(\w)/g, (match, letter) => letter.toUpperCase()
+      );
+      const sortDirection = sortTypeString.substring(underscoreIndex + 1);
+      params = params.set('sort', sortParameter + ',' + sortDirection);
+    }
+    return params;
   }
 
   private checkPage(): void {
