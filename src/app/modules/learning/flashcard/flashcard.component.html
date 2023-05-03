@@ -1,0 +1,12 @@
+<div class="flashcard" *ngIf="card" [class.active]="isActive" [class.reversed]="isActive">
+  <div class="front" (click)="rotateCard()">
+    <div class="content">
+      <div class="content-text">{{card.front}}</div>
+    </div>
+  </div>
+  <div class="back" (click)="rotateCard()">
+    <div class="content">
+      <div class="content-text">{{card.back}}</div>
+    </div>
+  </div>
+</div>

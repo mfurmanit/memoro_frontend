@@ -1,5 +1,6 @@
 import { upperCase, upperFirst } from 'lodash-es';
 import { TranslateService } from '@ngx-translate/core';
+import { CardCollection } from '@models/card-collection';
 
 export type UndefinedTypes = null | undefined;
 export type DefinedTypesOf<T> = T extends UndefinedTypes ? never : T;
@@ -9,6 +10,11 @@ export function isDefined<T>(value: T): value is DefinedTypesOf<T> {
 }
 
 export const isNullOrUndefined = <T>(value: T | UndefinedTypes): value is UndefinedTypes => !isDefined(value);
+
+export const isCardCollection = (value: unknown): value is CardCollection => {
+  const collection = value as CardCollection;
+  return !isNullOrUndefined(collection.name) && !isNullOrUndefined(collection.icon) && !isNullOrUndefined(collection.id);
+};
 
 export const titleCaseWord = (word: string): string => {
   if (!word) return word;

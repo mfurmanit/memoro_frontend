@@ -1,0 +1,40 @@
+.flex-element {
+  flex-grow: 1;
+  margin: 10px;
+}
+
+.flex-button {
+  padding: 0;
+  height: 50px;
+  margin-top: 15px;
+}
+
+.main-container {
+  height: calc(100% - 64px);
+}
+
+.list-item-container {
+  height: auto;
+  width: 100%;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.selected {
+  margin-top: 20px;
+}
+
+.message {
+  font-size: 0.9rem;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 2rem;
+  width: 70%;
+}

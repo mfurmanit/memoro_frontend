@@ -7,7 +7,9 @@
     "sharing": "udostępnianie",
     "favorite": "ulubione",
     "reports": "raporty",
-    "userPanel": "panel użytkownika"
+    "userPanel": "panel użytkownika",
+    "learningMode": "tryb nauki",
+    "browsingMode": "tryb przeglądania"
   },
   "buttons": {
     "login": "zaloguj",
@@ -17,7 +19,11 @@
     "cancel": "anuluj",
     "confirm": "potwierdź",
     "createCollection": "utwórz kolekcję",
-    "createCard": "utwórz kartę"
+    "createCard": "utwórz kartę",
+    "learn": "ucz się",
+    "browse": "przeglądaj",
+    "favorite": "ulubione",
+    "all": "wszystkie"
   },
   "common": {
     "username": "nazwa użytkownika",
@@ -122,5 +128,16 @@
   "sides": {
     "FRONT": "Przód",
     "BACK": "Tył"
+  },
+  "answers": {
+    "AGAIN": "POWTÓRZ",
+    "HARD": "TRUDNA",
+    "GOOD": "DOBRA",
+    "EASY": "ŁATWA"
+  },
+  "messages": {
+    "selectCollection": "Wybierz kolekcję z listy, aby przejrzeć dostępne karty lub rozpocząć naukę!",
+    "noCardsToLearn": "W wybranej kolekcji nie ma obecnie kart do powtórki!",
+    "noCardsToBrowse": "W wybranej kolekcji nie ma żadnych kart!"
   }
 }
