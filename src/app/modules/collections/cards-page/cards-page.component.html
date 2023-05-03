@@ -4,6 +4,10 @@
       {{ 'buttons.createCard' | translate | capitalize }}
     </button>
 
+    <button class="flex-element flex-button mat-primary" role="button" mat-button color="primary" (click)="changeFavorites()">
+      {{ (onlyFavorites ? 'buttons.all' : 'buttons.favorite') | translate | capitalize}}
+    </button>
+
     <ng-container *ngIf="form">
       <app-select class="flex-element"
                   [form]="form"

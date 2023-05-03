@@ -20,10 +20,6 @@ export const routes: Routes = [
     loadChildren: () => import('./sharing/sharing.module').then(module => module.SharingModule)
   },
   {
-    path: 'favorite',
-    loadChildren: () => import('./favorite/favorite.module').then(module => module.FavoriteModule)
-  },
-  {
     path: 'reports',
     loadChildren: () => import('./reports/reports.module').then(module => module.ReportsModule)
   }
