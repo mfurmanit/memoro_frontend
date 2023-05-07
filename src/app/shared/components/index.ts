@@ -6,6 +6,7 @@ import { TextInputComponent } from '@components/text-input/text-input.component'
 import { InputErrorsComponent } from '@components/input-errors/input-errors.component';
 import { AutocompleteComponent } from '@components/autocomplete/autocomplete.component';
 import { SelectComponent } from '@components/select/select.component';
+import { DateRangeComponent } from '@components/date-range/date-range.component';
 
 export const components = [
   LayoutComponent,
@@ -15,7 +16,8 @@ export const components = [
   TextInputComponent,
   InputErrorsComponent,
   AutocompleteComponent,
-  SelectComponent
+  SelectComponent,
+  DateRangeComponent
 ];
 
 export * from '@components/layout/layout.component';
@@ -26,3 +28,4 @@ export * from '@components/text-input/text-input.component';
 export * from '@components/input-errors/input-errors.component';
 export * from '@components/autocomplete/autocomplete.component';
 export * from '@components/select/select.component';
+export * from '@components/date-range/date-range.component';

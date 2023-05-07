@@ -7,19 +7,18 @@
   </div>
 
   <div class="flex-center">
-    <mat-icon class="layout-icon mr-2">
+    <mat-icon class="layout-icon mr-3">
       psychology
     </mat-icon>
     <span>{{ 'titles.main' | translate | uppercase }}</span>
+    <mat-icon class="layout-icon ml-3 mirrored-icon">
+      psychology
+    </mat-icon>
   </div>
 
   <div class="flex-right disable-select">
-
-    <mat-icon matPrefix class="layout-icon mr-3 pointer" [matTooltip]="'titles.userPanel' | translate | capitalize">
-      account_circle
-    </mat-icon>
-
-    <button mat-raised-button color="primary" (click)="logout()">{{'buttons.logout' | translate | capitalize}}
+    <button type="button" aria-label="Logout" mat-icon-button (click)="logout()">
+      <mat-icon aria-label="Logout icon">logout</mat-icon>
     </button>
   </div>
 </mat-toolbar>

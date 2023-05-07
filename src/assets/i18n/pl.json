@@ -6,10 +6,13 @@
     "learning": "nauka",
     "sharing": "udostępnianie",
     "favorite": "ulubione",
-    "reports": "raporty",
+    "statistics": "statystyki",
     "userPanel": "panel użytkownika",
     "learningMode": "tryb nauki",
-    "browsingMode": "tryb przeglądania"
+    "browsingMode": "tryb przeglądania",
+    "viewedCards": "ilość wyświetlonych kart",
+    "reviewedCards": "ilość nauczonych kart",
+    "reviewTime": "czas nauki (s)"
   },
   "buttons": {
     "login": "zaloguj",
@@ -36,7 +39,9 @@
     "collection": "kolekcja",
     "value": "wartość",
     "sort": "sortowanie",
-    "side": "strona filtrowania"
+    "side": "strona filtrowania",
+    "from": "data od",
+    "to": "data do"
   },
   "actions": {
     "CREATE": "utwórz",
@@ -48,12 +53,15 @@
     "CREATE_CARD": "utwórz kartę"
   },
   "validations": {
-    "required": "pole jest wymagane",
-    "min": "minimalna wartość wynosi {{min}}",
-    "max": "maksymalna wartość wynosi {{max}}",
-    "minlength": "minimalna ilość znaków wynosi {{requiredLength}}",
-    "maxlength": "maksymalna ilość znaków wynosi {{requiredLength}}",
-    "email": "wprowadzony adres e-mail jest nieprawidłowy"
+    "required": "Pole jest wymagane",
+    "min": "Minimalna wartość wynosi {{min}}",
+    "max": "Maksymalna wartość wynosi {{max}}",
+    "minlength": "Minimalna ilość znaków wynosi {{requiredLength}}",
+    "maxlength": "Maksymalna ilość znaków wynosi {{requiredLength}}",
+    "email": "Wprowadzony adres e-mail jest nieprawidłowy",
+    "matStartDateInvalid": "Data początkowa jest niepoprawna",
+    "matEndDateInvalid": "Data końcowa jest niepoprawna",
+    "matDatepickerParse": "Format daty jest niepoprawny"
   },
   "icons": {
     "accessibility": "człowiek",
@@ -138,6 +146,7 @@
   "messages": {
     "selectCollection": "Wybierz kolekcję z listy, aby przejrzeć dostępne karty lub rozpocząć naukę!",
     "noCardsToLearn": "W wybranej kolekcji nie ma obecnie kart do powtórki!",
-    "noCardsToBrowse": "W wybranej kolekcji nie ma żadnych kart!"
+    "noCardsToBrowse": "W wybranej kolekcji nie ma żadnych kart!",
+    "selectRange": "wskaż zakres dat"
   }
 }

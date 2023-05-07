@@ -1,0 +1,25 @@
+@use "node_modules/@angular/material/theming" as mat;
+@import "src/assets/scss/variables";
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 60vh;
+}
+
+.charts-container {
+  overflow-y: scroll;
+}
+
+.inputs {
+  justify-content: space-around;
+  width: 50%;
+  margin: 0 auto;
+  border: 2px solid mat.mat-color($my-app-primary);
+  padding: 1.5rem 1rem 1rem;
+}
+
+.pie-margin {
+  margin-bottom: 140px;
+}

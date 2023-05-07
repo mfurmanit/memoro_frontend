@@ -12,6 +12,7 @@
     <ng-container *ngIf="form">
       <app-autocomplete class="flex-element"
                         [form]="form"
+                        [appearance]="'outline'"
                         [controlName]="'collection'"
                         [displayFnName]="'collection'"
                         [asyncValuesFetch]="getCollections"
