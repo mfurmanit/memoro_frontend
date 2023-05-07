@@ -1,36 +1,6 @@
 @use "@angular/material/theming" as mat;
 @import "src/assets/scss/variables";
 
-:host ::ng-deep .mat-toolbar.mat-primary {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-
-
-}
-
-//.mat-nav-list > .mat-list-item:first-of-type {
-//  background-color: mat.mat-color($my-app-primary);
-//  color: white;
-//  display: flex;
-//  justify-content: center;
-//  pointer-events: none;
-//}
-
-.standard-icon {
-  transform: scale(1.2);
-}
-
-.mirrored-icon {
-  transform: scaleX(-1) scale(1.2);
-}
-
-.mat-drawer:not(.mat-drawer-side) {
-  margin-top: 64px;
-}
-
 :host {
   overflow: hidden;
   height: 100vh;
@@ -38,6 +8,18 @@
   main {
     position: relative;
   }
+}
+
+:host ::ng-deep .mat-toolbar.mat-primary {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.mat-drawer:not(.mat-drawer-side) {
+  margin-top: 64px;
 }
 
 .list-item-active {

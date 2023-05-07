@@ -1,7 +1,7 @@
 import { upperCase, upperFirst } from 'lodash-es';
 import { TranslateService } from '@ngx-translate/core';
 import { CardCollection } from '@models/card-collection';
-import { format, isMatch, parse, parseISO } from 'date-fns';
+import { format, isMatch, parse } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import { SortedData } from '@models/statistics-response';
 
@@ -53,10 +53,6 @@ export function getProperty<Type, Key extends keyof Type>(object: Type, key: Key
   return object[key];
 }
 
-export function isAssignable<Type>(object: Type, property: string): object is Type {
-  return property in object;
-}
-
 export const isDateAfter = (a: Date, b: Date): boolean => {
   const dateA = new Date(a.getFullYear(), a.getMonth(), a.getDate());
   const dateB = new Date(b.getFullYear(), b.getMonth(), b.getDate());
@@ -83,5 +79,5 @@ export const getSortedData = (response: { [date: string]: number }): SortedData 
   const labels = sortedData.map((entry) => formatDateFromBackend(entry[0]));
   const data = sortedData.map((entry) => entry[1]);
 
-  return { labels, data };
+  return {labels, data};
 };

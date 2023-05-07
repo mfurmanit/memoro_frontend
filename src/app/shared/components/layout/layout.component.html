@@ -2,19 +2,10 @@
 
 <mat-sidenav-container>
   <mat-sidenav #drawer
-               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [attr.role]="'navigation'"
                [mode]="'over'"
                [opened]="false">
     <mat-nav-list>
-<!--        <mat-list-item [disableRipple]="true">-->
-<!--    <mat-icon class="standard-icon mr-3">-->
-<!--      psychology-->
-<!--    </mat-icon>-->
-<!--    <span>{{ 'titles.main' | translate | uppercase }}</span>-->
-<!--    <mat-icon class="ml-3 mirrored-icon">-->
-<!--      psychology-->
-<!--    </mat-icon>-->
-<!--  </mat-list-item>-->
       <ng-container *ngFor="let element of menuElements">
         <ng-container *ngIf="{ translated: (element.title | translate | capitalize) }; let title">
           <mat-list-item appMenuItem

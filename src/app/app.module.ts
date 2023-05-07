@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,8 +15,6 @@ import { NgChartsModule } from 'ng2-charts';
 
 export const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader =
   (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
-
-
 
 @NgModule({
   declarations: [
@@ -36,14 +34,8 @@ export const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader =
       missingTranslationHandler: {provide: MissingTranslationHandler, useClass: HttpMissingTranslationHandler, deps: [HttpClient]}
     }),
   ],
-  providers: [
-
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 }
-
-// BarChart - review time
-// LineChart - viewed cards
-// ScatterChart - reviewed cards
