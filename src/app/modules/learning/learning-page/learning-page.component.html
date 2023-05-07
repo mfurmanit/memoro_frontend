@@ -1,0 +1,54 @@
+<div class="d-flex flex-column main-container">
+  <div class="d-flex flex-direction-row w-100">
+    <button class="flex-element flex-button"
+            role="button"
+            mat-raised-button
+            color="primary"
+            (click)="startLearning()"
+            [disabled]="!collectionId || mode === LearningMode.LEARNING">
+      {{ 'buttons.learn' | translate | capitalize }}
+    </button>
+
+    <ng-container *ngIf="form">
+      <app-autocomplete class="flex-element"
+                        [form]="form"
+                        [appearance]="'outline'"
+                        [controlName]="'collection'"
+                        [displayFnName]="'collection'"
+                        [asyncValuesFetch]="getCollections"
+                        [placeholder]="'common.collection'"
+                        [distinct]="false">
+      </app-autocomplete>
+
+      <app-select class="flex-element"
+                  [form]="form"
+                  [controlName]="'sort'"
+                  [values]="sortTypes"
+                  [displayFnName]="'sortType'"
+                  [placeholder]="'common.sort'"
+                  [appearance]="'outline'">
+      </app-select>
+    </ng-container>
+  </div>
+
+  <div *ngIf="mode !== LearningMode.NONE">
+    <ng-container [ngSwitch]="mode">
+      <mat-card class="title" *ngSwitchCase="LearningMode.LEARNING">
+        <mat-icon class="mr-2">school</mat-icon>
+        {{'titles.learningMode' | translate | uppercase}}
+      </mat-card>
+      <mat-card class="title" *ngSwitchCase="LearningMode.BROWSING">
+        <mat-icon class="mr-2">layers</mat-icon>
+        {{'titles.browsingMode' | translate | uppercase}}
+      </mat-card>
+    </ng-container>
+  </div>
+
+  <ng-container [ngSwitch]="mode">
+    <mat-card class="m-2 text-center message" *ngSwitchCase="LearningMode.NONE">
+      {{'messages.selectCollection' | translate}}
+    </mat-card>
+    <app-learning-container *ngSwitchCase="LearningMode.LEARNING" [collectionId]="collectionId"></app-learning-container>
+    <app-browsing-container *ngSwitchCase="LearningMode.BROWSING" [state]="state"></app-browsing-container>
+  </ng-container>
+</div>

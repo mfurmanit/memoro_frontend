@@ -11,6 +11,7 @@ import { HttpMissingTranslationHandler } from '@others/http-missing-translation-
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './modules/main.module';
+import { NgChartsModule } from 'ng2-charts';
 
 export const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader =
   (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -21,6 +22,7 @@ export const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader =
   ],
   imports: [
     BrowserModule,
+    NgChartsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,

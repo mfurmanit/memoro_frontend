@@ -1,0 +1,19 @@
+<ng-container *ngIf="cards && cards.length > 0; else noCards">
+  <div class="d-flex flex-row h-100 align-items-center">
+    <button mat-icon-button class="left" [disableRipple]="true" [disabled]="cardNumber === 0" (click)="decrement()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+
+    <app-flashcard class="center" [card]="cards[cardNumber]" [mode]="mode"></app-flashcard>
+
+    <button mat-icon-button class="right" [disableRipple]="true" [disabled]="cardNumber === cards.length - 1" (click)="increment()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #noCards>
+  <mat-card class="m-2 text-center message">
+    {{'messages.noCardsToBrowse' | translate}}
+  </mat-card>
+</ng-template>

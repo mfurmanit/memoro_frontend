@@ -2,9 +2,9 @@
 
 <mat-sidenav-container>
   <mat-sidenav #drawer
-               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-               [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false">
+               [attr.role]="'navigation'"
+               [mode]="'over'"
+               [opened]="false">
     <mat-nav-list>
       <ng-container *ngFor="let element of menuElements">
         <ng-container *ngIf="{ translated: (element.title | translate | capitalize) }; let title">

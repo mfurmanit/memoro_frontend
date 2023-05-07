@@ -2,11 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
-  {path: '', redirectTo: 'home-page', pathMatch: 'full'},
-  {
-    path: 'home-page',
-    loadChildren: () => import('./home-page/home-page.module').then(module => module.HomePageModule)
-  },
+  {path: '', redirectTo: 'collections', pathMatch: 'full'},
   {
     path: 'collections',
     loadChildren: () => import('./collections/collections.module').then(module => module.CollectionsModule)
@@ -20,12 +16,8 @@ export const routes: Routes = [
     loadChildren: () => import('./sharing/sharing.module').then(module => module.SharingModule)
   },
   {
-    path: 'favorite',
-    loadChildren: () => import('./favorite/favorite.module').then(module => module.FavoriteModule)
-  },
-  {
-    path: 'reports',
-    loadChildren: () => import('./reports/reports.module').then(module => module.ReportsModule)
+    path: 'statistics',
+    loadChildren: () => import('./statistics/statistics.module').then(module => module.StatisticsModule)
   }
 ];
 

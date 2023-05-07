@@ -1,0 +1,29 @@
+<mat-card class="d-flex flex-direction-row inputs mt-3 mb-3">
+  <app-date-range [form]="form" [appearance]="'outline'"></app-date-range>
+
+  <app-autocomplete [form]="form"
+                    [appearance]="'outline'"
+                    [controlName]="'collection'"
+                    [displayFnName]="'collection'"
+                    [asyncValuesFetch]="getCollections"
+                    [placeholder]="'common.collection'"
+                    [distinct]="false">
+  </app-autocomplete>
+</mat-card>
+
+<div class="w-100 h-100 overflow-auto charts-container mb-4 pb-4">
+  <ng-container *ngFor="let chartKey of ['bar', 'line', 'pie']">
+    <ng-container *ngIf="chartsConfig[chartKey] as chartData">
+      <h2 class="text-center mt-5">{{ ('titles.' + chartData.title) | translate | capitalize }}</h2>
+      <div class="chart-container" [ngClass]="{'pie-margin': chartKey === 'pie'}">
+        <canvas
+          baseChart
+          [data]="chartData.data"
+          [options]="chartData.options"
+          [plugins]="chartData.plugins"
+          [type]="chartData.type">
+        </canvas>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

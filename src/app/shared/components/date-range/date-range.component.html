@@ -1,0 +1,14 @@
+<mat-form-field [appearance]="appearance" *ngIf="form">
+  <mat-label>{{ 'messages.selectRange' | translate | capitalize }}</mat-label>
+  <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+    <input matStartDate [formControlName]="'from'" [placeholder]="'common.from' | translate | capitalize">
+    <input matEndDate [formControlName]="'to'" [placeholder]="'common.to' | translate | capitalize">
+  </mat-date-range-input>
+  <mat-hint>DD.MM.YYYY – DD.MM.YYYY</mat-hint>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+
+  <mat-error>
+    <app-input-errors [errors]="$any(form.controls['from'].errors || form.controls['to'].errors)"></app-input-errors>
+  </mat-error>
+</mat-form-field>

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FavoriteComponent } from './favorite.component';
+import { StatisticsPageComponent } from './statistics-page/statistics-page.component';
 import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
-  {path: '', component: FavoriteComponent}
+  {path: '', component: StatisticsPageComponent}
 ];
 
 @NgModule({
@@ -14,5 +14,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class FavoriteRoutingModule {
+export class StatisticsRoutingModule {
 }

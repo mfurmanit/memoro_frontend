@@ -38,6 +38,7 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
   form: FormGroup | null = null;
   collectionId: string | null = null;
   cards$: Observable<Page<Card>> = of(emptyPage<Card>());
+  onlyFavorites: boolean = false;
 
   readonly sortTypes: SortType[] = cardsSortTypes;
   readonly sides: CardSide[] = Object.values(CardSide);
@@ -81,6 +82,11 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
     }
   }
 
+  changeFavorites(): void {
+    this.onlyFavorites = !this.onlyFavorites;
+    this.reloadData();
+  }
+
   private initForm(): void {
     this.form = this.formBuilder.group({
       value: [''],
@@ -99,8 +105,9 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
   private initListeners(): void {
     if (!isNullOrUndefined(this.form))
       this.subscriptions.add(
-        combineLatest([this.getValueObservable(), this.getSortObservable(), this.getSideObservable()])
-          .subscribe(([value, sort, side]) => this.loadCards(sort, side, value))
+        combineLatest([
+          this.getValueObservable(), this.getSortObservable(), this.getSideObservable()
+        ]).subscribe(([value, sort, side]) => this.loadCards(sort, side, value))
       );
   }
 
@@ -123,12 +130,15 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
     );
   }
 
-  private loadCards(sortType: SortType = SortType.NONE, side: CardSide = CardSide.FRONT, value?: string | null): void {
+  private loadCards(sortType: SortType = SortType.NONE,
+                    side: CardSide = CardSide.FRONT,
+                    value?: string | null): void {
     let params = new HttpParams()
       .set('page', this.pageIndex)
       .set('size', this.pageSize)
       .set('side', side);
 
+    if (this.onlyFavorites) params = params.set('onlyFavorites', true);
     if (!isNullOrUndefined(this.collectionId)) params = params.append('id', this.collectionId);
     if (!isNullOrUndefined(value)) params = params.set('value', value);
     params = this.applySort(sortType, params);
@@ -186,7 +196,7 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
           } as ConfirmationDialogData
         );
       case ActionType.CREATE:
-        return of({collectionId: this.collectionId})
+        return of({collectionId: this.collectionId});
       default:
         return of({
           card: data,

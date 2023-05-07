@@ -1,3 +1,6 @@
+@use "@angular/material/theming" as mat;
+@import "src/assets/scss/variables";
+
 :host ::ng-deep {
   .mat-icon {
     height: 1.1em;
@@ -59,6 +62,10 @@
     white-space: nowrap;
     width: 90%;
     margin: 0 auto;
+  }
+
+  .mat-button {
+    border: 1px solid mat.mat-color($my-app-primary);
   }
 }
 

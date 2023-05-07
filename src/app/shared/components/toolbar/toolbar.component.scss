@@ -24,3 +24,7 @@
   justify-content: flex-end;
   align-items: center;
 }
+
+.mirrored-icon {
+  transform: scaleX(-1) scale(1.3);
+}

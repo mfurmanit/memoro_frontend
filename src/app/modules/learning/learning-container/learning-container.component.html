@@ -1,0 +1,15 @@
+<ng-container *ngIf="(card$ | async) as card; else noCards">
+  <app-flashcard [card]="card" [mode]="mode"></app-flashcard>
+  <div *ngIf="state$ | async" class="answers-container">
+    <button mat-raised-button
+            [color]="'primary'"
+            (click)="answerCard(card.id, answer)"
+            *ngFor="let answer of answers">{{ ('answers.' + answer) | translate }}</button>
+  </div>
+</ng-container>
+
+<ng-template #noCards>
+  <mat-card class="m-2 text-center message">
+    {{'messages.noCardsToLearn' | translate}}
+  </mat-card>
+</ng-template>
