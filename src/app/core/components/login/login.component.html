@@ -1,15 +1,33 @@
-<form>
-  <div class="form-outline mb-4">
-    <input type="email" id="username" class="form-control" #username/>
-    <label class="form-label" for="username">{{ 'common.username' | translate | capitalize }}</label>
+<div class="login-background">
+  <div class="login-container">
+    <div class="login-icon-container">
+      <mat-icon>person</mat-icon>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <app-input class="input-element"
+                 [hideCounter]="true"
+                 [form]="form"
+                 [controlName]="'username'"
+                 [placeholder]="'common.username'"
+                 [appearance]="'outline'">
+      </app-input>
+      <app-input class="input-element"
+                 [hideCounter]="true"
+                 [form]="form"
+                 [controlName]="'password'"
+                 [placeholder]="'common.password'"
+                 [appearance]="'outline'"
+                 [type]="'password'">
+      </app-input>
+      <div class="login-button-container">
+        <button mat-raised-button color="primary" type="submit" class="mr-2"
+                [disabled]="!form.valid">
+          {{ 'buttons.login' | translate | capitalize}}
+        </button>
+        <button mat-stroked-button color="primary" type="button" [routerLink]="['/register']">
+          {{ 'buttons.register' | translate | capitalize}}
+        </button>
+      </div>
+    </form>
   </div>
-
-  <div class="form-outline mb-4">
-    <input type="password" id="password" class="form-control" #password/>
-    <label class="form-label" for="password">{{ 'common.password' | translate | capitalize }}</label>
-  </div>
-
-  <button type="submit" class="btn btn-primary btn-block mb-4" (click)="login(username.value, password.value)">
-    {{ 'buttons.login' | translate | capitalize }}
-  </button>
-</form>
+</div>

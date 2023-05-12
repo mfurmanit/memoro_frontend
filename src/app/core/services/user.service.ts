@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { User } from '@models/user';
+import { User, UserRequest } from '@models/user';
 import { filterNil } from '@others/operators';
 
 @Injectable({
@@ -19,5 +19,9 @@ export class UserService {
 
   isUserLoggedIn(): Observable<boolean> {
     return this.http.get<boolean>(`${this.url}/logged-in`);
+  }
+
+  register(request: UserRequest): Observable<void> {
+    return this.http.post<void>(`${this.url}/register`, request);
   }
 }

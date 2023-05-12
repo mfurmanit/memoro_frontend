@@ -38,12 +38,18 @@
     </ng-container>
   </div>
 
+  <ng-container *ngIf="isLoading$ | async;">
+    <div class="d-flex justify-content-center mt-2">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  </ng-container>
+
   <ng-container *ngIf="(cards$ | async) as page">
     <ng-container *ngIf="page?.content as cards">
       <mat-nav-list [disableRipple]="true" *ngIf="(cards || []).length > 0">
         <ng-container *ngFor="let element of $any(cards)">
-          <div class="d-flex flex-row list-item-container">
-            <mat-list-item  >
+          <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
+            <mat-list-item>
               <mat-icon matListIcon> {{element.favorite ? 'favorite' : 'favorite_border'}} </mat-icon>
               <span matLine> {{ element.front }} </span>
               <span matLine class="size"> {{ element.back }} </span>
@@ -66,6 +72,7 @@
       </mat-paginator>
     </ng-container>
   </ng-container>
+
 </div>
 
 <mat-menu #menu="matMenu">

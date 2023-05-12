@@ -1,7 +1,7 @@
 @use "@angular/material/theming" as mat;
 @import "src/assets/scss/variables";
 
-.login-background {
+.register-background {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
   background: linear-gradient(135deg, mat.mat-color($my-app-primary), mat.mat-color($my-app-accent));
 }
 
-.login-container {
+.register-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
-.login-icon-container {
+.register-icon-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +37,7 @@
   margin-bottom: 20px;
 }
 
-.login-button-container {
+.register-button-container {
   width: 100%;
   display: flex;
   justify-content: center;

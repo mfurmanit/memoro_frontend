@@ -1,0 +1,68 @@
+<div class="register-background">
+  <div class="register-container">
+    <div class="register-icon-container">
+      <mat-icon>person_add</mat-icon>
+    </div>
+    <form *ngIf="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <app-input class="input-element"
+                 [form]="registerForm"
+                 [controlName]="'name'"
+                 [placeholder]="'common.firstName'"
+                 [appearance]="'outline'">
+      </app-input>
+
+      <app-input class="input-element"
+                 [form]="registerForm"
+                 [controlName]="'surname'"
+                 [placeholder]="'common.surname'"
+                 [appearance]="'outline'">
+      </app-input>
+
+      <app-input class="input-element"
+                 [form]="registerForm"
+                 [controlName]="'username'"
+                 [placeholder]="'common.username'"
+                 [appearance]="'outline'">
+      </app-input>
+
+      <app-input class="input-element"
+                 [form]="registerForm"
+                 [controlName]="'email'"
+                 [placeholder]="'common.email'"
+                 [appearance]="'outline'"
+                 [type]="'email'">
+      </app-input>
+
+      <app-input class="input-element"
+                 [form]="registerForm"
+                 [matcher]="matcher"
+                 [info]="'messages.strongPassword'"
+                 [controlName]="'password'"
+                 [placeholder]="'common.password'"
+                 [appearance]="'outline'"
+                 [type]="'password'">
+      </app-input>
+
+      <app-input class="input-element"
+                 [form]="registerForm"
+                 [matcher]="matcher"
+                 [info]="'messages.strongPassword'"
+                 [controlName]="'confirmPassword'"
+                 [placeholder]="'common.confirmPassword'"
+                 [appearance]="'outline'"
+                 [type]="'password'">
+      </app-input>
+
+      <div class="register-button-container">
+        <button mat-raised-button color="primary" type="submit" class="mr-2">
+          {{ 'buttons.register' | translate | capitalize}}
+        </button>
+        <button mat-stroked-button color="primary" type="button" [routerLink]="['/login']">
+          {{ 'buttons.login' | translate | capitalize}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!--                [disabled]="!registerForm.valid">-->

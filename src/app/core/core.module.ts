@@ -6,15 +6,19 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LoginComponent } from './components/login/login.component';
 
 import * as fromGuards from './guards/index';
+import { RegisterComponent } from './components/register/register.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    TranslateModule
+    TranslateModule,
+    RouterModule
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   entryComponents: [],
   providers: [

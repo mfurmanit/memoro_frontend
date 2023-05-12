@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,6 +11,11 @@ import { AuthenticationService } from '@services/authentication.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+
+  form = new FormGroup({
+    username: new FormControl<string | null>(null, Validators.required),
+    password: new FormControl<string | null>(null, Validators.required)
+  });
 
   redirectUrl: string | null = null;
   private readonly subscriptions = new Subscription();
@@ -26,8 +31,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.resolveRedirectUrl();
   }
 
-  login(username: string, password: string): void {
-    this.authService.loginUser({username, password, redirectUrl: this.getRedirectUrl()});
+  login(): void {
+    if (this.form.valid) {
+      const { username, password } = this.form.value;
+      this.authService.loginUser({username: username!, password: password!, redirectUrl: this.getRedirectUrl()});
+    }
   }
 
   ngOnDestroy(): void {
@@ -35,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private getRedirectUrl(): string {
-    return this.redirectUrl ?? 'home-page';
+    return this.redirectUrl ?? 'collections';
   }
 
   private resolveRedirectUrl(): void {

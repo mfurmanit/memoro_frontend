@@ -5,13 +5,13 @@ import { ActionType } from '@enums/action-type';
 import { CrudHandler } from '@others/crud-handler';
 import { ComponentType } from '@angular/cdk/portal';
 import { CollectionDialogData, ConfirmationDialogData, CrudDialog, CrudDialogData } from '@models/crud-dialog';
-import { combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, tap } from 'rxjs';
 import { CollectionDialogComponent } from '../collection-dialog/collection-dialog.component';
 import { SnackbarService } from '@services/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CardCollectionService } from '@services/card-collection.service';
 import { HttpParams } from '@angular/common/http';
-import { emptyPage, Page } from '@models/page';
+import { Page } from '@models/page';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs';
 import { Router } from '@angular/router';
 import { SortType } from '@models/sort-type';
@@ -20,13 +20,15 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { isNullOrUndefined } from '@others/helper-functions';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { collectionsActions, collectionsSortTypes } from '@others/constants';
+import { fadeInAnimation } from '../../../shared/animations/fade-in.animation';
 
 // TODO: Extract shared logic to separate component
 
 @Component({
   selector: 'app-collections',
   templateUrl: './collections-page.component.html',
-  styleUrls: ['./collections-page.component.scss']
+  styleUrls: ['./collections-page.component.scss'],
+  animations: [fadeInAnimation]
 })
 export class CollectionsPageComponent extends CrudHandler<CardCollection> implements OnInit {
 
@@ -37,7 +39,8 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   pageSizeOptions = [5, 10, 20, 50];
 
   form: FormGroup | null = null;
-  collections$: Observable<Page<CardCollection>> = of(emptyPage<CardCollection>());
+  isLoading$ = new BehaviorSubject(true);
+  collections$: Observable<Page<CardCollection>> | undefined;
 
   readonly sortTypes: SortType[] = collectionsSortTypes;
   readonly actions: CommonAction[] = collectionsActions;
@@ -115,6 +118,8 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   }
 
   private loadCollections(sortType: SortType = SortType.NONE, value?: string | null): void {
+    this.isLoading$.next(true);
+
     let params = new HttpParams()
       .set('page', this.pageIndex)
       .set('size', this.pageSize);
@@ -122,7 +127,9 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
     params = this.applySort(sortType, params);
     if (!isNullOrUndefined(value)) params = params.set('value', value);
 
-    this.collections$ = this.service.getAll(params);
+    this.collections$ = this.service.getAll(params).pipe(
+      tap(() => this.isLoading$.next(false))
+    );
   }
 
   private applySort(sortType: SortType = SortType.NONE, params: HttpParams): HttpParams {

@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Required } from '../../decorators/required.decorator';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { DefaultErrorStateMatcher } from '@others/default-error-state-matcher';
 
 @Component({
   selector: 'app-input',
@@ -12,6 +14,7 @@ export class InputComponent {
   @Input() id?: string;
   @Input() appearance: MatFormFieldAppearance = 'standard';
   @Input() info?: string;
+  @Input() matcher: ErrorStateMatcher = new DefaultErrorStateMatcher();
   @Input() @Required placeholder!: string;
   @Input() @Required form!: FormGroup;
   @Input() @Required controlName!: string;

@@ -10,7 +10,8 @@
          [maxlength]="maxlength"
          [readonly]="readonly"
          [placeholder]="translatePlaceholder ? (placeholder | translate: interpolateParams | capitalize) : placeholder"
-         [autocomplete]="autocomplete">
+         [autocomplete]="autocomplete"
+         [errorStateMatcher]="matcher">
   <mat-hint *ngIf="maxlength || info" align="end" class="d-flex align-middle align-items-center">
     <span *ngIf="maxlength && !hideCounter" [ngClass]="{'mr-1': info}" class="mr-1">{{input.value.length || 0}}/{{maxlength}}</span>
     <mat-icon *ngIf="info" [matTooltip]="info | translate | capitalize" [matTooltipClass]="'text-center'" color="primary" class="help">
