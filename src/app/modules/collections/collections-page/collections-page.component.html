@@ -24,11 +24,17 @@
     </ng-container>
   </div>
 
+  <ng-container *ngIf="isLoading$ | async;">
+    <div class="d-flex justify-content-center mt-2">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  </ng-container>
+
   <ng-container *ngIf="(collections$ | async) as page">
     <ng-container *ngIf="page?.content as collections">
       <mat-nav-list *ngIf="(collections || []).length > 0">
         <ng-container *ngFor="let element of $any(collections)">
-          <div class="d-flex flex-row list-item-container">
+          <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
             <mat-list-item (click)="navigate(element)">
               <mat-icon matListIcon> {{ element?.icon }} </mat-icon>
               <span matLine> {{ element.name}} </span>

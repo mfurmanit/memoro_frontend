@@ -15,7 +15,8 @@
     "reviewTime": "czas nauki (s)"
   },
   "buttons": {
-    "login": "zaloguj",
+    "login": "zaloguj się",
+    "register": "zarejestruj się",
     "logout": "wyloguj",
     "close": "zamknij",
     "save": "zapisz",
@@ -31,7 +32,11 @@
   "common": {
     "username": "nazwa użytkownika",
     "password": "hasło",
+    "confirmPassword": "powtórz hasło",
+    "email": "adres e-mail",
     "name": "nazwa",
+    "firstName": "imię",
+    "surname": "nazwisko",
     "icon": "ikona",
     "front": "przód",
     "back": "tył",
@@ -61,7 +66,9 @@
     "email": "Wprowadzony adres e-mail jest nieprawidłowy",
     "matStartDateInvalid": "Data początkowa jest niepoprawna",
     "matEndDateInvalid": "Data końcowa jest niepoprawna",
-    "matDatepickerParse": "Format daty jest niepoprawny"
+    "matDatepickerParse": "Format daty jest niepoprawny",
+    "weakPassword": "Hasło nie spełnia wymagań bezpieczeństwa",
+    "notSame": "Hasła nie są takie same"
   },
   "icons": {
     "accessibility": "człowiek",
@@ -147,6 +154,8 @@
     "selectCollection": "Wybierz kolekcję z listy, aby przejrzeć dostępne karty lub rozpocząć naukę!",
     "noCardsToLearn": "W wybranej kolekcji nie ma obecnie kart do powtórki!",
     "noCardsToBrowse": "W wybranej kolekcji nie ma żadnych kart!",
-    "selectRange": "wskaż zakres dat"
+    "selectRange": "wskaż zakres dat",
+    "strongPassword": "hasło musi zawierać co najmniej 8 znaków, w tym co najmniej jedną małą i dużą literę, cyfrę oraz znak specjalny z zakresu #$!%&()*+,\\-./:;<=>?@[\\]^_`{|}~",
+    "registered": "rejestracja przebiegła pomyślnie, sprawdź swój e-mail w celu aktywacji konta"
   }
 }

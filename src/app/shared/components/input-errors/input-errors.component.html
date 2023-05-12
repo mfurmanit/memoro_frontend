@@ -1,24 +1,22 @@
 <ng-container *ngFor="let error of $any(errors) | keyvalue">
-  <span class="text-red-500 text-xxs block font-medium">
-    <p *ngIf="error.value !== true">
-      <ng-container *ngIf="error.key === 'minlength'">
-        {{ 'validations.' + error.key | translate : {value: $any(error.value).requiredLength} }}
-      </ng-container>
-      <ng-container *ngIf="error.key === 'maxLength'">
-        {{ 'validations.' + error.key | translate : {value: $any(error.value).requiredLength} }}
-      </ng-container>
-      <ng-container *ngIf="error.key === 'min'">
-        {{ 'validations.' + error.key | translate : {value: $any(error.value).min} }}
-      </ng-container>
-      <ng-container *ngIf="error.key === 'max'">
-        {{ 'validations.' + error.key | translate : {value: $any(error.value).max} }}
-      </ng-container>
-      <ng-container *ngIf="error.key === 'matDatepickerParse' || error.key === 'matEndDateInvalid' || error.key === 'matStartDateInvalid'">
-        {{ 'validations.' + error.key | translate | capitalize }}
-      </ng-container>
-    </p>
-    <p *ngIf="error.value === true">
-      {{ 'validations.' + error.key | translate }}
-    </p>
-  </span>
+  <p class="text-red-500 text-xxs block font-medium" *ngIf="error.value !== true">
+    <ng-container *ngIf="error.key === 'minlength'">
+      {{ 'validations.' + error.key | translate : {value: $any(error.value).requiredLength} }}
+    </ng-container>
+    <ng-container *ngIf="error.key === 'maxLength'">
+      {{ 'validations.' + error.key | translate : {value: $any(error.value).requiredLength} }}
+    </ng-container>
+    <ng-container *ngIf="error.key === 'min'">
+      {{ 'validations.' + error.key | translate : {value: $any(error.value).min} }}
+    </ng-container>
+    <ng-container *ngIf="error.key === 'max'">
+      {{ 'validations.' + error.key | translate : {value: $any(error.value).max} }}
+    </ng-container>
+    <ng-container *ngIf="error.key === 'matDatepickerParse' || error.key === 'matEndDateInvalid' || error.key === 'matStartDateInvalid'">
+      {{ 'validations.' + error.key | translate | capitalize }}
+    </ng-container>
+  </p>
+  <p class="text-red-500 text-xxs block font-medium" *ngIf="error.value === true">
+    {{ 'validations.' + error.key | translate }}
+  </p>
 </ng-container>

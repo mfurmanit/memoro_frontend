@@ -4,6 +4,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { SharedModule } from '@shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { RouterModule } from '@angular/router';
 
 import * as fromGuards from './guards/index';
 
@@ -11,10 +13,12 @@ import * as fromGuards from './guards/index';
   imports: [
     CommonModule,
     SharedModule,
-    TranslateModule
+    TranslateModule,
+    RouterModule
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   entryComponents: [],
   providers: [

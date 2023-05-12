@@ -41,3 +41,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   -moz-user-select: none;
   -ms-user-select: none;
 }
+
+mat-form-field.ng-invalid.ng-touched.mat-form-field-invalid {
+  animation: mat-error-animation;
+  animation-duration: 0.2s;
+  margin-bottom: 20px;
+}
+
+.mat-error > app-input-errors > p {
+  margin-bottom: 0.5rem;
+}
+
+@keyframes mat-error-animation {
+  from {
+    margin-bottom: 0;
+  }
+  to {
+    margin-bottom: 20px;
+  }
+}

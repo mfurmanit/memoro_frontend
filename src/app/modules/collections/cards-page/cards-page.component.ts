@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { combineLatest, Observable, of } from 'rxjs';
-import { emptyPage, Page } from '@models/page';
+import { BehaviorSubject, combineLatest, Observable, of, tap } from 'rxjs';
+import { Page } from '@models/page';
 import { CommonAction } from '@models/common-action';
 import { ActionType } from '@enums/action-type';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,11 +21,13 @@ import { SortType } from '@models/sort-type';
 import { isNullOrUndefined } from '@others/helper-functions';
 import { cardsActions, cardsSortTypes } from '@others/constants';
 import { CardSide } from '@models/card-side';
+import { fadeInAnimation } from '../../../shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards-page.component.html',
-  styleUrls: ['./cards-page.component.scss']
+  styleUrls: ['./cards-page.component.scss'],
+  animations: [fadeInAnimation]
 })
 export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
 
@@ -37,7 +39,8 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
 
   form: FormGroup | null = null;
   collectionId: string | null = null;
-  cards$: Observable<Page<Card>> = of(emptyPage<Card>());
+  isLoading$ = new BehaviorSubject(true);
+  cards$: Observable<Page<Card>> | undefined;
   onlyFavorites: boolean = false;
 
   readonly sortTypes: SortType[] = cardsSortTypes;
@@ -133,6 +136,8 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
   private loadCards(sortType: SortType = SortType.NONE,
                     side: CardSide = CardSide.FRONT,
                     value?: string | null): void {
+    this.isLoading$.next(true);
+
     let params = new HttpParams()
       .set('page', this.pageIndex)
       .set('size', this.pageSize)
@@ -143,7 +148,9 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
     if (!isNullOrUndefined(value)) params = params.set('value', value);
     params = this.applySort(sortType, params);
 
-    this.cards$ = this.service.getAll(params);
+    this.cards$ = this.service.getAll(params).pipe(
+      tap(() => this.isLoading$.next(false))
+    );
   }
 
   private applySort(sortType: SortType = SortType.NONE, params: HttpParams): HttpParams {
