@@ -149,12 +149,7 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
     params = this.applySort(sortType, params);
 
     this.cards$ = this.service.getAll(params).pipe(
-      debounceTime(3000),
-      tap(() => {
-        this.isLoading$.next(false);
-        console.log('tapped');
-      }),
-
+      tap(() => this.isLoading$.next(false))
     );
   }
 

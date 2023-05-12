@@ -4,6 +4,7 @@
       <mat-icon>person</mat-icon>
     </div>
     <form [formGroup]="form" (ngSubmit)="login()">
+
       <app-input class="input-element"
                  [hideCounter]="true"
                  [form]="form"
@@ -11,6 +12,7 @@
                  [placeholder]="'common.username'"
                  [appearance]="'outline'">
       </app-input>
+
       <app-input class="input-element"
                  [hideCounter]="true"
                  [form]="form"
@@ -19,6 +21,7 @@
                  [appearance]="'outline'"
                  [type]="'password'">
       </app-input>
+
       <div class="login-button-container">
         <button mat-raised-button color="primary" type="submit" class="mr-2"
                 [disabled]="!form.valid">

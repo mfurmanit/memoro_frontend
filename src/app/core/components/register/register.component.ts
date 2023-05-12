@@ -41,7 +41,6 @@ export class RegisterComponent extends BaseComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.registerForm);
     if (this.registerForm!.valid) {
       this.userService.register(this.registerForm!.value).subscribe(() => {
         this.snackbarService.openSnackBar(
