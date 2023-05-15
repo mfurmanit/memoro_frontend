@@ -1,6 +1,24 @@
 @use "@angular/material/theming" as mat;
 @import "src/assets/scss/variables";
 
+:host ::ng-deep {
+  overflow: auto;
+
+  mat-form-field.ng-invalid.ng-touched.mat-form-field-invalid {
+    animation: mat-error-animation;
+    animation-duration: 0.2s;
+  }
+
+  .mat-form-field-subscript-wrapper {
+    position: relative;
+  }
+
+  .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .register-background {
   display: flex;
   justify-content: center;

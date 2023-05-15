@@ -74,10 +74,7 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
   actionClicked(action: CommonAction, collection: Card): void {
     switch (action.type) {
       case ActionType.MARK_AS_FAVORITE:
-        this.subscriptions.add(
-          this.service.markAsFavorite(collection.id)
-            .subscribe(() => this.handleActionSuccess(action.type))
-        );
+        this.markAsFavorite(collection.id);
         break;
       default:
         super.onActionClicked({type: action.type, element: collection});
@@ -96,6 +93,13 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
       side: [CardSide.FRONT],
       sort: [SortType.NONE, Validators.required]
     });
+  }
+
+  private markAsFavorite(id: string): void {
+    this.subscriptions.add(
+      this.service.markAsFavorite(id)
+        .subscribe(() => this.handleActionSuccess(ActionType.MARK_AS_FAVORITE))
+    );
   }
 
   private resolveCollectionId(): void {

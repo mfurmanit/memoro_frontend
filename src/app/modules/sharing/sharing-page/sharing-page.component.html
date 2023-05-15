@@ -1,23 +1,10 @@
 <div class="d-flex flex-column main-container">
   <div class="d-flex flex-direction-row w-100">
-    <button class="flex-element flex-button" role="button" mat-raised-button color="primary" (click)="create()">
-      {{ 'buttons.createCard' | translate | capitalize }}
-    </button>
-
-    <button class="flex-element flex-button mat-primary" role="button" mat-button color="primary" (click)="changeFavorites()">
-      {{ (onlyFavorites ? 'buttons.all' : 'buttons.favorite') | translate | capitalize}}
+    <button class="flex-element flex-button" role="button" mat-raised-button color="primary" (click)="share()">
+      {{ 'buttons.shareCollection' | translate | capitalize }}
     </button>
 
     <ng-container *ngIf="form">
-      <app-select class="flex-element"
-                  [form]="form"
-                  [controlName]="'side'"
-                  [values]="sides"
-                  [displayFnName]="'side'"
-                  [placeholder]="'common.side'"
-                  [appearance]="'outline'">
-      </app-select>
-
       <app-input class="flex-element"
                  [hideCounter]="true"
                  [form]="form"
@@ -25,7 +12,6 @@
                  [placeholder]="'common.value'"
                  [appearance]="'outline'">
       </app-input>
-
 
       <app-select class="flex-element"
                   [form]="form"
@@ -44,42 +30,40 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="(cards$ | async) as page">
-    <ng-container *ngIf="page?.content as cards">
-      <ng-container *ngIf="(cards || []).length > 0; else noData">
-        <mat-nav-list [disableRipple]="true">
-          <ng-container *ngFor="let element of $any(cards)">
+  <ng-container *ngIf="(collections$ | async) as collections">
+      <ng-container *ngIf="(collections || []).length > 0; else noData">
+        <mat-nav-list>
+          <ng-container *ngFor="let element of $any(collections)">
             <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
-              <mat-list-item>
-                <mat-icon matListIcon> {{element.favorite ? 'favorite' : 'favorite_border'}} </mat-icon>
-                <span matLine> {{ element.front }} </span>
-                <span matLine class="size"> {{ element.back }} </span>
+              <mat-list-item (click)="navigate(element)" [disableRipple]="element?.my" [disabled]="element?.my">
+                <mat-icon matListIcon> {{ element?.icon }} </mat-icon>
+                <span matLine> {{ element.name}} </span>
+                <span matLine class="size"> {{ element.size}} </span>
               </mat-list-item>
 
               <div class="d-flex m-2 align-items-center">
-                <mat-icon matSuffix class="pointer" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{collection: element}">
+                <mat-icon *ngIf="!element?.my"
+                          matSuffix
+                          class="pointer"
+                          [matMenuTriggerFor]="menu"
+                          [matMenuTriggerData]="{collection: element}">
                   settings
+                </mat-icon>
+                <mat-icon *ngIf="element?.my" matSuffix>
+                  person
                 </mat-icon>
               </div>
             </div>
           </ng-container>
         </mat-nav-list>
-
-        <mat-paginator [pageSize]="pageSize"
-                       [pageIndex]="pageIndex"
-                       [pageSizeOptions]="pageSizeOptions"
-                       [length]="page.totalElements"
-                       (page)="onPageChanged($event)">
-        </mat-paginator>
       </ng-container>
 
       <ng-template #noData>
         <mat-card class="m-2 text-center message">
-          {{'messages.noCardsToBrowse' | translate}}
+          {{'messages.noCollections' | translate}}
         </mat-card>
       </ng-template>
 
-    </ng-container>
   </ng-container>
 </div>
 

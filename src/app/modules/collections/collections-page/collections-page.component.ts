@@ -74,14 +74,9 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
 
   actionClicked(action: CommonAction, collection: CardCollection): void {
     switch (action.type) {
-      case ActionType.CREATE_CARD:
-        // TODO: Navigate to cards component and open dialog
-        break;
       case ActionType.LEARN:
+        // TODO: Implement navigation with patching data
         this.router.navigate(['learning']);
-        break;
-      case ActionType.SHARE:
-        // TODO: Implement share logic
         break;
       default:
         super.onActionClicked({type: action.type, element: collection});
@@ -165,18 +160,43 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   }
 
   protected getDialog(type?: ActionType | undefined): ComponentType<CrudDialog> {
-    return type === ActionType.DELETE ? ConfirmationDialogComponent : CollectionDialogComponent;
+    switch (type) {
+      case ActionType.DELETE:
+        return ConfirmationDialogComponent;
+      case ActionType.SHARE:
+        return ConfirmationDialogComponent;
+      default:
+        return CollectionDialogComponent;
+    }
   }
 
   protected getDialogData(type?: ActionType | undefined, data?: CardCollection | undefined): Observable<CrudDialogData> {
-    return of(
-      type === ActionType.DELETE ? {
-        header: 'collections.dialog.deleteHeader',
-        content: 'collections.dialog.deleteMessage',
-      } as ConfirmationDialogData : {
-        cardCollection: data
-      } as CollectionDialogData
-    );
+    return of(this.resolveDialogData(type, data));
+  }
+
+  private resolveDialogData(type?: ActionType | undefined, data?: CardCollection | undefined): CrudDialogData {
+    switch (type) {
+      case ActionType.DELETE:
+        return {
+          header: 'collections.dialog.deleteHeader',
+          content: 'collections.dialog.deleteMessage',
+        } as ConfirmationDialogData;
+      case ActionType.SHARE:
+        return {
+          header: 'collections.dialog.shareHeader',
+          content: 'collections.dialog.shareMessage',
+        } as ConfirmationDialogData;
+      default:
+        return {
+          cardCollection: data
+        } as CollectionDialogData;
+    }
+  }
+
+  protected override getMethod(type: ActionType, data?: CardCollection, id?: string): Observable<CardCollection | void> {
+    if (type === ActionType.SHARE && !isNullOrUndefined(id)) {
+      console.log('ssss');
+      return this.service.share(id);
+    } else return super.getMethod(type, data, id);
   }
 }
-

@@ -1,0 +1,31 @@
+<form novalidate autocomplete="off" [formGroup]="form" *ngIf="form">
+  <div class="dialog">
+    <h2 mat-dialog-title>{{ 'collections.dialog.share' | translate | capitalize }}</h2>
+    <mat-dialog-content>
+
+      <app-autocomplete [form]="form"
+                        [appearance]="'outline'"
+                        [controlName]="'collection'"
+                        [displayFnName]="'collection'"
+                        [asyncValuesFetch]="getCollections"
+                        [placeholder]="'common.collection'"
+                        [distinct]="false">
+      </app-autocomplete>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="d-flex justify-content-end">
+      <button role="button" mat-button type="submit" id="cancelButton" [mat-dialog-close]="null">
+        {{ 'buttons.cancel'| translate | capitalize }}
+      </button>
+      <button role="button"
+              mat-raised-button
+              color="primary"
+              type="button"
+              id="saveUserButton"
+              [disabled]="form.invalid"
+              (click)="closeDialog()">
+        {{ 'buttons.save' | translate | capitalize }}
+      </button>
+    </mat-dialog-actions>
+  </div>
+</form>

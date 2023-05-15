@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { CrudService } from '@models/crud-service';
-import { CardCollection } from '@models/card-collection';
+import { CardCollection, SharedCardCollection } from '@models/card-collection';
 import { Page } from '@models/page';
 
 @Injectable({
@@ -28,5 +28,17 @@ export class CardCollectionService implements CrudService<CardCollection> {
 
   getAll(params?: HttpParams): Observable<Page<CardCollection>> {
     return this.http.get<Page<CardCollection>>(`${this.url}`, {params});
+  }
+
+  getAllShared(): Observable<SharedCardCollection[]> {
+    return this.http.get<SharedCardCollection[]>(`${this.url}/shared`, {});
+  }
+
+  share(id: string): Observable<void> {
+    return this.http.post<void>(`${this.url}/${id}/share`, null);
+  }
+
+  save(id: string): Observable<void> {
+    return this.http.post<void>(`${this.url}/${id}/save`, null);
   }
 }
