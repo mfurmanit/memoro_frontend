@@ -30,20 +30,22 @@ export const collectionsSortTypes: SortType[] = [
 
 export const sharingSortTypes: SortType[] = collectionsSortTypes;
 
-export const collectionsActions: CommonAction[] = [
+export const sharedCollectionActions: CommonAction[] = [
   {type: ActionType.EDIT, icon: 'edit'},
-  {type: ActionType.DELETE, icon: 'delete'},
-  {type: ActionType.LEARN, icon: 'school'},
+  {type: ActionType.DELETE, icon: 'delete'}
+];
+
+export const collectionActions: CommonAction[] = [
+  ...sharedCollectionActions,
   {type: ActionType.SHARE, icon: 'share'}
 ];
 
 export const sharingActions: CommonAction[] = [
-  {type: ActionType.SAVE, icon: 'bookmark_add'},
-  {type: ActionType.PREVIEW, icon: 'search'}
+  {type: ActionType.SAVE, icon: 'bookmark_add'}
 ];
 
 export const mySharingActions: CommonAction[] = [
-  {type: ActionType.STOP_SHARING, icon: 'bookmark_add'}, // TODO: ICON
+  {type: ActionType.STOP_SHARING, icon: 'close'}
 ];
 
 export const cardsSortTypes: SortType[] = [

@@ -19,7 +19,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { isNullOrUndefined } from '@others/helper-functions';
 import { debounceTime, startWith } from 'rxjs/operators';
-import { collectionsActions, collectionsSortTypes } from '@others/constants';
+import { collectionActions, collectionsSortTypes, sharedCollectionActions } from '@others/constants';
 import { fadeInAnimation } from '../../../shared/animations/fade-in.animation';
 
 // TODO: Extract shared logic to separate component
@@ -43,7 +43,8 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   collections$: Observable<Page<CardCollection>> | undefined;
 
   readonly sortTypes: SortType[] = collectionsSortTypes;
-  readonly actions: CommonAction[] = collectionsActions;
+  readonly collectionActions: CommonAction[] = collectionActions;
+  readonly sharedCollectionActions: CommonAction[] = sharedCollectionActions;
 
   constructor(private router: Router,
               private dialog: MatDialog,
@@ -69,19 +70,11 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   }
 
   navigate(collection: CardCollection): void {
-    this.router.navigate(['collections', collection.id, 'cards']);
+    this.router.navigate(['collections', collection.id, 'cards', false]);
   }
 
   actionClicked(action: CommonAction, collection: CardCollection): void {
-    switch (action.type) {
-      case ActionType.LEARN:
-        // TODO: Implement navigation with patching data
-        this.router.navigate(['learning']);
-        break;
-      default:
-        super.onActionClicked({type: action.type, element: collection});
-        break;
-    }
+    super.onActionClicked({type: action.type, element: collection});
   }
 
   private initForm(): void {

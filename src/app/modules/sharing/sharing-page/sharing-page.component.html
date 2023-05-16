@@ -42,15 +42,11 @@
               </mat-list-item>
 
               <div class="d-flex m-2 align-items-center">
-                <mat-icon *ngIf="!element?.my"
-                          matSuffix
+                <mat-icon matSuffix
                           class="pointer"
                           [matMenuTriggerFor]="menu"
                           [matMenuTriggerData]="{collection: element}">
-                  settings
-                </mat-icon>
-                <mat-icon *ngIf="element?.my" matSuffix>
-                  person
+                  {{ (element?.my ? 'person' : 'settings') }}
                 </mat-icon>
               </div>
             </div>
@@ -69,7 +65,7 @@
 
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-collection="collection">
-    <ng-container *ngFor="let action of actions">
+    <ng-container *ngFor="let action of (collection?.my ? mySharingActions : sharingActions)">
       <button mat-menu-item (click)="actionClicked(action, collection)">
         <mat-icon>{{ action.icon }}</mat-icon>
         <span>{{ ('actions.' + action.type) | translate | capitalize }}</span>

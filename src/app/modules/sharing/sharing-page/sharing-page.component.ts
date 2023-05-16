@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CardCollection, SharedCardCollection } from '@models/card-collection';
+import { CardCollection } from '@models/card-collection';
 import { BehaviorSubject, combineLatest, Observable, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '@services/snackbar.service';
@@ -9,15 +9,15 @@ import { CardCollectionService } from '@services/card-collection.service';
 import { isNullOrUndefined } from '@others/helper-functions';
 import { SortType } from '@models/sort-type';
 import { debounceTime, map, startWith } from 'rxjs/operators';
-import { sharingActions, sharingSortTypes } from '@others/constants';
+import { mySharingActions, sharingActions, sharingSortTypes } from '@others/constants';
 import { CommonAction } from '@models/common-action';
 import { fadeInAnimation } from '../../../shared/animations/fade-in.animation';
 import { ActionType } from '@enums/action-type';
 import { ComponentType } from '@angular/cdk/portal';
-import { CollectionDialogData, ConfirmationDialogData, CrudDialog, CrudDialogData } from '@models/crud-dialog';
+import { ConfirmationDialogData, CrudDialog, CrudDialogData } from '@models/crud-dialog';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs';
-import { CollectionDialogComponent } from '../../collections/collection-dialog/collection-dialog.component';
 import { CrudHandler } from '@others/crud-handler';
+import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
 @Component({
   selector: 'app-sharing-page',
@@ -29,12 +29,13 @@ export class SharingPageComponent extends CrudHandler<CardCollection> implements
 
   form: FormGroup | null = null;
 
-  collections$: Observable<SharedCardCollection[]> | undefined;
+  collections$: Observable<CardCollection[]> | undefined;
 
   isLoading$ = new BehaviorSubject(true);
 
   readonly sortTypes: SortType[] = sharingSortTypes;
-  readonly actions: CommonAction[] = sharingActions;
+  readonly sharingActions: CommonAction[] = sharingActions;
+  readonly mySharingActions: CommonAction[] = mySharingActions;
 
   constructor(private router: Router,
               private dialog: MatDialog,
@@ -50,20 +51,23 @@ export class SharingPageComponent extends CrudHandler<CardCollection> implements
   }
 
   share(): void {
-
+    super.onActionClicked({type: ActionType.SHARE});
   }
 
   actionClicked(action: CommonAction, collection: CardCollection): void {
-    console.log('aa');
+    super.onActionClicked({type: action.type, element: collection});
   }
 
   navigate(collection: CardCollection): void {
-    console.log('navigate');
-    // TODO: Navigate properly
+    this.router.navigate(['collections', collection.id, 'cards', true]);
+  }
+
+  protected override reloadData(): void {
+    this.loadCollections(this.getSort(), this.getValue());
   }
 
   protected getActionPrefix(): string {
-    throw new Error('Method not implemented.');
+    return 'collections.actions';
   }
 
   private initForm(): void {
@@ -104,12 +108,12 @@ export class SharingPageComponent extends CrudHandler<CardCollection> implements
     );
   }
 
-  private filterCollections(collections: SharedCardCollection[], value?: string | null): SharedCardCollection[] {
+  private filterCollections(collections: CardCollection[], value?: string | null): CardCollection[] {
     return !isNullOrUndefined(value) ?
       collections.filter(collection => collection.name.includes(value)) : collections;
   }
 
-  private sortCollections(collections: SharedCardCollection[], sortType: SortType = SortType.NONE): SharedCardCollection[] {
+  private sortCollections(collections: CardCollection[], sortType: SortType = SortType.NONE): CardCollection[] {
     if (sortType === SortType.NONE) {
       return collections;
     }
@@ -140,9 +144,12 @@ export class SharingPageComponent extends CrudHandler<CardCollection> implements
   protected getDialog(type?: ActionType | undefined): ComponentType<CrudDialog> {
     switch (type) {
       case ActionType.SAVE:
+      case ActionType.STOP_SHARING:
         return ConfirmationDialogComponent;
+      case ActionType.SHARE:
+        return ShareDialogComponent;
       default:
-        return CollectionDialogComponent;
+        throw Error('Brak implementacji wskazanej metody.');
     }
   }
 
@@ -162,17 +169,30 @@ export class SharingPageComponent extends CrudHandler<CardCollection> implements
           header: 'collections.dialog.stopSharingHeader',
           content: 'collections.dialog.stopSharingMessage',
         } as ConfirmationDialogData;
+      case ActionType.SHARE:
+        return null;
       default:
-        return {
-          cardCollection: data
-        } as CollectionDialogData;
+        throw Error('Brak implementacji wskazanej metody.');
     }
   }
 
   protected override getMethod(type: ActionType, data?: CardCollection, id?: string): Observable<CardCollection | void> {
-    if (type === ActionType.SHARE && !isNullOrUndefined(id)) {
-      console.log('ssss');
-      return this.service.share(id);
-    } else return super.getMethod(type, data, id);
+    if (type === ActionType.SHARE && !isNullOrUndefined(data))
+      return this.service.share(data.id);
+    else if (type === ActionType.SAVE && !isNullOrUndefined(id))
+      return this.service.save(id);
+    else if (type === ActionType.STOP_SHARING && !isNullOrUndefined(id))
+      return this.service.stopSharing(id);
+    else throw Error('Brak implementacji wskazanej metody.');
+  }
+
+  private getSort(): SortType {
+    if (!isNullOrUndefined(this.form)) return this.form.controls['sort'].value;
+    else return SortType.NONE;
+  }
+
+  private getValue(): string | null {
+    if (!isNullOrUndefined(this.form)) return this.form.controls['value'].value;
+    else return null;
   }
 }

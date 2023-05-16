@@ -58,7 +58,8 @@
     "LEARN": "ucz się",
     "CREATE_CARD": "utwórz kartę",
     "SAVE": "zapisz",
-    "PREVIEW": "podejrzyj"
+    "PREVIEW": "podejrzyj",
+    "STOP_SHARING": "zatrzymaj udostępnianie"
   },
   "validations": {
     "required": "Pole jest wymagane",
@@ -71,7 +72,8 @@
     "matEndDateInvalid": "Data końcowa jest niepoprawna",
     "matDatepickerParse": "Format daty jest niepoprawny",
     "weakPassword": "Hasło nie spełnia wymagań bezpieczeństwa",
-    "notSame": "Hasła nie są takie same"
+    "notSame": "Hasła nie są takie same",
+    "collectionNotSelected": "Należy wybrać kolekcję z listy"
   },
   "icons": {
     "accessibility": "człowiek",
@@ -124,7 +126,8 @@
       "EDIT": "kolekcja została zaktualizowana pomyślnie",
       "DELETE": "kolekcja została usunięta pomyślnie",
       "SHARE": "kolekcja została udostępniona pomyślnie",
-      "SAVE": "kolekcja została udostępniona pomyślnie"
+      "SAVE": "kolekcja została zapisana pomyślnie",
+      "STOP_SHARING": "kolekcja została pomyślnie usunięta z listy udostępnianych"
     }
   },
   "cards": {

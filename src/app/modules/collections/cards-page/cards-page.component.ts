@@ -39,6 +39,7 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
 
   form: FormGroup | null = null;
   collectionId: string | null = null;
+  isShared: boolean = true;
   isLoading$ = new BehaviorSubject(true);
   cards$: Observable<Page<Card>> | undefined;
   onlyFavorites: boolean = false;
@@ -105,6 +106,7 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
   private resolveCollectionId(): void {
     this.subscriptions.add(this.route.paramMap.subscribe(params => {
       this.collectionId = params.get('id');
+      this.isShared = (params.get('shared') === 'true');
       this.initListeners();
     }));
   }

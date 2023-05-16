@@ -71,7 +71,7 @@
 
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-collection="collection">
-    <ng-container *ngFor="let action of actions">
+    <ng-container *ngFor="let action of (collection?.shared ? sharedCollectionActions : collectionActions)">
       <button mat-menu-item (click)="actionClicked(action, collection)">
         <mat-icon>{{ action.icon }}</mat-icon>
         <span>{{ ('actions.' + action.type) | translate | capitalize }}</span>
