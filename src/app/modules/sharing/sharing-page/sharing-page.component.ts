@@ -28,9 +28,7 @@ import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 export class SharingPageComponent extends CrudHandler<CardCollection> implements OnInit {
 
   form: FormGroup | null = null;
-
   collections$: Observable<CardCollection[]> | undefined;
-
   isLoading$ = new BehaviorSubject(true);
 
   readonly sortTypes: SortType[] = sharingSortTypes;

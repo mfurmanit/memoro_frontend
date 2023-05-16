@@ -187,9 +187,8 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   }
 
   protected override getMethod(type: ActionType, data?: CardCollection, id?: string): Observable<CardCollection | void> {
-    if (type === ActionType.SHARE && !isNullOrUndefined(id)) {
-      console.log('ssss');
+    if (type === ActionType.SHARE && !isNullOrUndefined(id))
       return this.service.share(id);
-    } else return super.getMethod(type, data, id);
+    else return super.getMethod(type, data, id);
   }
 }

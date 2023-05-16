@@ -31,34 +31,34 @@
   </ng-container>
 
   <ng-container *ngIf="(collections$ | async) as collections">
-      <ng-container *ngIf="(collections || []).length > 0; else noData">
-        <mat-nav-list>
-          <ng-container *ngFor="let element of $any(collections)">
-            <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
-              <mat-list-item (click)="navigate(element)" [disableRipple]="element?.my" [disabled]="element?.my">
-                <mat-icon matListIcon> {{ element?.icon }} </mat-icon>
-                <span matLine> {{ element.name}} </span>
-                <span matLine class="size"> {{ element.size}} </span>
-              </mat-list-item>
+    <ng-container *ngIf="(collections || []).length > 0; else noData">
+      <mat-nav-list>
+        <ng-container *ngFor="let element of $any(collections)">
+          <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
+            <mat-list-item (click)="navigate(element)" [disableRipple]="element?.my" [disabled]="element?.my">
+              <mat-icon matListIcon> {{ element?.icon }} </mat-icon>
+              <span matLine> {{ element.name}} </span>
+              <span matLine class="size"> {{ element.size}} </span>
+            </mat-list-item>
 
-              <div class="d-flex m-2 align-items-center">
-                <mat-icon matSuffix
-                          class="pointer"
-                          [matMenuTriggerFor]="menu"
-                          [matMenuTriggerData]="{collection: element}">
-                  {{ (element?.my ? 'person' : 'settings') }}
-                </mat-icon>
-              </div>
+            <div class="d-flex m-2 align-items-center">
+              <mat-icon matSuffix
+                        class="pointer"
+                        [matMenuTriggerFor]="menu"
+                        [matMenuTriggerData]="{collection: element}">
+                {{ (element?.my ? 'person' : 'settings') }}
+              </mat-icon>
             </div>
-          </ng-container>
-        </mat-nav-list>
-      </ng-container>
+          </div>
+        </ng-container>
+      </mat-nav-list>
+    </ng-container>
 
-      <ng-template #noData>
-        <mat-card class="m-2 text-center message">
-          {{'messages.noCollections' | translate}}
-        </mat-card>
-      </ng-template>
+    <ng-template #noData>
+      <mat-card class="m-2 text-center message">
+        {{'messages.noCollections' | translate}}
+      </mat-card>
+    </ng-template>
 
   </ng-container>
 </div>
