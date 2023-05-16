@@ -4,6 +4,6 @@ export enum ActionType {
   EDIT = 'EDIT',
   MARK_AS_FAVORITE = 'MARK_AS_FAVORITE',
   SHARE = 'SHARE',
-  LEARN = 'LEARN',
-  CREATE_CARD = 'CREATE_CARD'
+  SAVE = 'SAVE',
+  STOP_SHARING = 'STOP_SHARING'
 }

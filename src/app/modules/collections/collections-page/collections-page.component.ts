@@ -19,7 +19,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { isNullOrUndefined } from '@others/helper-functions';
 import { debounceTime, startWith } from 'rxjs/operators';
-import { collectionsActions, collectionsSortTypes } from '@others/constants';
+import { collectionActions, collectionsSortTypes, sharedCollectionActions } from '@others/constants';
 import { fadeInAnimation } from '../../../shared/animations/fade-in.animation';
 
 // TODO: Extract shared logic to separate component
@@ -43,7 +43,8 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   collections$: Observable<Page<CardCollection>> | undefined;
 
   readonly sortTypes: SortType[] = collectionsSortTypes;
-  readonly actions: CommonAction[] = collectionsActions;
+  readonly collectionActions: CommonAction[] = collectionActions;
+  readonly sharedCollectionActions: CommonAction[] = sharedCollectionActions;
 
   constructor(private router: Router,
               private dialog: MatDialog,
@@ -69,24 +70,11 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   }
 
   navigate(collection: CardCollection): void {
-    this.router.navigate(['collections', collection.id, 'cards']);
+    this.router.navigate(['collections', collection.id, 'cards', false]);
   }
 
   actionClicked(action: CommonAction, collection: CardCollection): void {
-    switch (action.type) {
-      case ActionType.CREATE_CARD:
-        // TODO: Navigate to cards component and open dialog
-        break;
-      case ActionType.LEARN:
-        this.router.navigate(['learning']);
-        break;
-      case ActionType.SHARE:
-        // TODO: Implement share logic
-        break;
-      default:
-        super.onActionClicked({type: action.type, element: collection});
-        break;
-    }
+    super.onActionClicked({type: action.type, element: collection});
   }
 
   private initForm(): void {
@@ -165,18 +153,42 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   }
 
   protected getDialog(type?: ActionType | undefined): ComponentType<CrudDialog> {
-    return type === ActionType.DELETE ? ConfirmationDialogComponent : CollectionDialogComponent;
+    switch (type) {
+      case ActionType.DELETE:
+        return ConfirmationDialogComponent;
+      case ActionType.SHARE:
+        return ConfirmationDialogComponent;
+      default:
+        return CollectionDialogComponent;
+    }
   }
 
   protected getDialogData(type?: ActionType | undefined, data?: CardCollection | undefined): Observable<CrudDialogData> {
-    return of(
-      type === ActionType.DELETE ? {
-        header: 'collections.dialog.deleteHeader',
-        content: 'collections.dialog.deleteMessage',
-      } as ConfirmationDialogData : {
-        cardCollection: data
-      } as CollectionDialogData
-    );
+    return of(this.resolveDialogData(type, data));
+  }
+
+  private resolveDialogData(type?: ActionType | undefined, data?: CardCollection | undefined): CrudDialogData {
+    switch (type) {
+      case ActionType.DELETE:
+        return {
+          header: 'collections.dialog.deleteHeader',
+          content: 'collections.dialog.deleteMessage',
+        } as ConfirmationDialogData;
+      case ActionType.SHARE:
+        return {
+          header: 'collections.dialog.shareHeader',
+          content: 'collections.dialog.shareMessage',
+        } as ConfirmationDialogData;
+      default:
+        return {
+          cardCollection: data
+        } as CollectionDialogData;
+    }
+  }
+
+  protected override getMethod(type: ActionType, data?: CardCollection, id?: string): Observable<CardCollection | void> {
+    if (type === ActionType.SHARE && !isNullOrUndefined(id))
+      return this.service.share(id);
+    else return super.getMethod(type, data, id);
   }
 }
-

@@ -32,37 +32,46 @@
 
   <ng-container *ngIf="(collections$ | async) as page">
     <ng-container *ngIf="page?.content as collections">
-      <mat-nav-list *ngIf="(collections || []).length > 0">
-        <ng-container *ngFor="let element of $any(collections)">
-          <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
-            <mat-list-item (click)="navigate(element)">
-              <mat-icon matListIcon> {{ element?.icon }} </mat-icon>
-              <span matLine> {{ element.name}} </span>
-              <span matLine class="size"> {{ element.size}} </span>
-            </mat-list-item>
+      <ng-container *ngIf="(collections || []).length > 0; else noData">
+        <mat-nav-list>
+          <ng-container *ngFor="let element of $any(collections)">
+            <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
+              <mat-list-item (click)="navigate(element)">
+                <mat-icon matListIcon> {{ element?.icon }} </mat-icon>
+                <span matLine> {{ element.name}} </span>
+                <span matLine class="size"> {{ element.size}} </span>
+              </mat-list-item>
 
-            <div class="d-flex m-2 align-items-center">
-              <mat-icon matSuffix class="pointer" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{collection: element}">
-                settings
-              </mat-icon>
+              <div class="d-flex m-2 align-items-center">
+                <mat-icon matSuffix class="pointer" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{collection: element}">
+                  settings
+                </mat-icon>
+              </div>
             </div>
-          </div>
-        </ng-container>
-      </mat-nav-list>
+          </ng-container>
+        </mat-nav-list>
 
-      <mat-paginator [pageSize]="pageSize"
-                     [pageIndex]="pageIndex"
-                     [pageSizeOptions]="pageSizeOptions"
-                     [length]="page.totalElements"
-                     (page)="onPageChanged($event)">
-      </mat-paginator>
+        <mat-paginator [pageSize]="pageSize"
+                       [pageIndex]="pageIndex"
+                       [pageSizeOptions]="pageSizeOptions"
+                       [length]="page.totalElements"
+                       (page)="onPageChanged($event)">
+        </mat-paginator>
+      </ng-container>
+
+      <ng-template #noData>
+        <mat-card class="m-2 text-center message">
+          {{'messages.noCollections' | translate}}
+        </mat-card>
+      </ng-template>
+
     </ng-container>
   </ng-container>
 </div>
 
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-collection="collection">
-    <ng-container *ngFor="let action of actions">
+    <ng-container *ngFor="let action of (collection?.shared ? sharedCollectionActions : collectionActions)">
       <button mat-menu-item (click)="actionClicked(action, collection)">
         <mat-icon>{{ action.icon }}</mat-icon>
         <span>{{ ('actions.' + action.type) | translate | capitalize }}</span>

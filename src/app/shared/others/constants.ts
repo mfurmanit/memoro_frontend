@@ -28,12 +28,24 @@ export const collectionsSortTypes: SortType[] = [
   SortType.CREATED_DATE_DESC,
 ];
 
-export const collectionsActions: CommonAction[] = [
+export const sharingSortTypes: SortType[] = collectionsSortTypes;
+
+export const sharedCollectionActions: CommonAction[] = [
   {type: ActionType.EDIT, icon: 'edit'},
-  {type: ActionType.DELETE, icon: 'delete'},
-  {type: ActionType.LEARN, icon: 'school'},
-  {type: ActionType.SHARE, icon: 'share'},
-  {type: ActionType.CREATE_CARD, icon: 'sell'}
+  {type: ActionType.DELETE, icon: 'delete'}
+];
+
+export const collectionActions: CommonAction[] = [
+  ...sharedCollectionActions,
+  {type: ActionType.SHARE, icon: 'share'}
+];
+
+export const sharingActions: CommonAction[] = [
+  {type: ActionType.SAVE, icon: 'bookmark_add'}
+];
+
+export const mySharingActions: CommonAction[] = [
+  {type: ActionType.STOP_SHARING, icon: 'close'}
 ];
 
 export const cardsSortTypes: SortType[] = [

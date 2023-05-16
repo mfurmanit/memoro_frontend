@@ -7,7 +7,7 @@ import { CardsPageComponent } from './cards-page/cards-page.component';
 const routes: Routes = [
   {path: '', component: CollectionsPageComponent},
   {
-    path: ':id/cards',
+    path: ':id/cards/:shared',
     component: CardsPageComponent
   },
 ];

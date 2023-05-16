@@ -1,8 +1,11 @@
-import { AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { ExistingValidatorConfig } from '@models/validation';
-import { isEmpty } from 'lodash-es';
-import { first, Observable, of, switchMap } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { isEmpty, isObject } from 'lodash-es';
+
+export const selectedValidator = (error: string, required: boolean = true): ValidatorFn => (control: AbstractControl): ValidationErrors | null => {
+  if (isEmpty(control.value) && !required) return null;
+  if (isEmpty(control.value) && required) return {required: true};
+  return isObject(control.value) ? null : {[error]: true};
+};
 
 export const passwordsValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const form = control as FormGroup;
@@ -34,15 +37,3 @@ export const strongPassword = (control: AbstractControl): boolean => {
   );
   return regex.test(control.value.toString());
 };
-
-export const existingValidator = <T>(existingConfig: ExistingValidatorConfig<T>,
-                                     error: string = 'alreadyExists'): AsyncValidatorFn =>
-  (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> =>
-    !control.valueChanges || control.pristine ? of(null) : control.valueChanges.pipe(
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(value => existingConfig.method(existingConfig.methodArguments(value))),
-      map(response => response === true ? {[error]: true} : (!isEmpty(control.errors) ? control.errors : null)),
-      first()
-    );
-

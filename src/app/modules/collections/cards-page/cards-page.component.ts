@@ -39,6 +39,7 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
 
   form: FormGroup | null = null;
   collectionId: string | null = null;
+  isShared: boolean = true;
   isLoading$ = new BehaviorSubject(true);
   cards$: Observable<Page<Card>> | undefined;
   onlyFavorites: boolean = false;
@@ -74,10 +75,7 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
   actionClicked(action: CommonAction, collection: Card): void {
     switch (action.type) {
       case ActionType.MARK_AS_FAVORITE:
-        this.subscriptions.add(
-          this.service.markAsFavorite(collection.id)
-            .subscribe(() => this.handleActionSuccess(action.type))
-        );
+        this.markAsFavorite(collection.id);
         break;
       default:
         super.onActionClicked({type: action.type, element: collection});
@@ -98,9 +96,17 @@ export class CardsPageComponent extends CrudHandler<Card> implements OnInit {
     });
   }
 
+  private markAsFavorite(id: string): void {
+    this.subscriptions.add(
+      this.service.markAsFavorite(id)
+        .subscribe(() => this.handleActionSuccess(ActionType.MARK_AS_FAVORITE))
+    );
+  }
+
   private resolveCollectionId(): void {
     this.subscriptions.add(this.route.paramMap.subscribe(params => {
       this.collectionId = params.get('id');
+      this.isShared = (params.get('shared') === 'true');
       this.initListeners();
     }));
   }

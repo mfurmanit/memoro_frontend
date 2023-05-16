@@ -42,12 +42,14 @@ export class RegisterComponent extends BaseComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm!.valid) {
-      this.userService.register(this.registerForm!.value).subscribe(() => {
-        this.snackbarService.openSnackBar(
-          {message: 'messages.registered'}
-        );
-        this.router.navigate(['/login'], {replaceUrl: true})
-      });
+      this.subscriptions.add(
+        this.userService.register(this.registerForm!.value).subscribe(() => {
+          this.snackbarService.openSnackBar(
+            {message: 'messages.registered'}
+          );
+          this.router.navigate(['/login'], {replaceUrl: true});
+        })
+      );
     }
   }
 }

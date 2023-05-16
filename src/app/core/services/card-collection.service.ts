@@ -29,4 +29,20 @@ export class CardCollectionService implements CrudService<CardCollection> {
   getAll(params?: HttpParams): Observable<Page<CardCollection>> {
     return this.http.get<Page<CardCollection>>(`${this.url}`, {params});
   }
+
+  getAllShared(): Observable<CardCollection[]> {
+    return this.http.get<CardCollection[]>(`${this.url}/shared`, {});
+  }
+
+  share(id: string): Observable<void> {
+    return this.http.post<void>(`${this.url}/${id}/share`, null);
+  }
+
+  save(id: string): Observable<void> {
+    return this.http.post<void>(`${this.url}/${id}/save`, null);
+  }
+
+  stopSharing(id: string): Observable<void> {
+    return this.http.post<void>(`${this.url}/${id}/stop-sharing`, null);
+  }
 }

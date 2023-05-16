@@ -1,5 +1,5 @@
 <div class="d-flex flex-column main-container">
-  <div class="d-flex flex-direction-row w-100">
+  <div *ngIf="!isShared" class="d-flex flex-direction-row w-100">
     <button class="flex-element flex-button" role="button" mat-raised-button color="primary" (click)="create()">
       {{ 'buttons.createCard' | translate | capitalize }}
     </button>
@@ -46,30 +46,46 @@
 
   <ng-container *ngIf="(cards$ | async) as page">
     <ng-container *ngIf="page?.content as cards">
-      <mat-nav-list [disableRipple]="true" *ngIf="(cards || []).length > 0">
-        <ng-container *ngFor="let element of $any(cards)">
-          <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
-            <mat-list-item>
-              <mat-icon matListIcon> {{element.favorite ? 'favorite' : 'favorite_border'}} </mat-icon>
-              <span matLine> {{ element.front }} </span>
-              <span matLine class="size"> {{ element.back }} </span>
-            </mat-list-item>
+      <ng-container *ngIf="(cards || []).length > 0; else noData">
+        <mat-nav-list [disableRipple]="true" [disabled]="isShared">
+          <ng-container *ngFor="let element of $any(cards)">
+            <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
+              <mat-list-item>
+                <mat-icon matListIcon> {{element.favorite ? 'favorite' : 'favorite_border'}} </mat-icon>
+                <span matLine> {{ element.front }} </span>
+                <span matLine class="size"> {{ element.back }} </span>
+              </mat-list-item>
 
-            <div class="d-flex m-2 align-items-center">
-              <mat-icon matSuffix class="pointer" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{collection: element}">
-                settings
-              </mat-icon>
+              <div class="d-flex m-2 align-items-center">
+                <mat-icon *ngIf="!isShared"
+                          matSuffix
+                          class="pointer"
+                          [matMenuTriggerFor]="menu"
+                          [matMenuTriggerData]="{collection: element}">
+                  settings
+                </mat-icon>
+                <mat-icon *ngIf="isShared" matSuffix>
+                  close
+                </mat-icon>
+              </div>
             </div>
-          </div>
-        </ng-container>
-      </mat-nav-list>
+          </ng-container>
+        </mat-nav-list>
 
-      <mat-paginator [pageSize]="pageSize"
-                     [pageIndex]="pageIndex"
-                     [pageSizeOptions]="pageSizeOptions"
-                     [length]="page.totalElements"
-                     (page)="onPageChanged($event)">
-      </mat-paginator>
+        <mat-paginator [pageSize]="pageSize"
+                       [pageIndex]="pageIndex"
+                       [pageSizeOptions]="pageSizeOptions"
+                       [length]="page.totalElements"
+                       (page)="onPageChanged($event)">
+        </mat-paginator>
+      </ng-container>
+
+      <ng-template #noData>
+        <mat-card class="m-2 text-center message">
+          {{'messages.noCardsToBrowse' | translate}}
+        </mat-card>
+      </ng-template>
+
     </ng-container>
   </ng-container>
 </div>

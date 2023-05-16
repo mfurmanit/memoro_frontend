@@ -23,6 +23,7 @@
     "cancel": "anuluj",
     "confirm": "potwierdź",
     "createCollection": "utwórz kolekcję",
+    "shareCollection": "udostępnij kolekcję",
     "createCard": "utwórz kartę",
     "learn": "ucz się",
     "browse": "przeglądaj",
@@ -55,7 +56,9 @@
     "MARK_AS_FAVORITE": "oznacz jako ulubione",
     "SHARE": "udostępnij",
     "LEARN": "ucz się",
-    "CREATE_CARD": "utwórz kartę"
+    "CREATE_CARD": "utwórz kartę",
+    "SAVE": "zapisz",
+    "STOP_SHARING": "zatrzymaj udostępnianie"
   },
   "validations": {
     "required": "Pole jest wymagane",
@@ -68,7 +71,8 @@
     "matEndDateInvalid": "Data końcowa jest niepoprawna",
     "matDatepickerParse": "Format daty jest niepoprawny",
     "weakPassword": "Hasło nie spełnia wymagań bezpieczeństwa",
-    "notSame": "Hasła nie są takie same"
+    "notSame": "Hasła nie są takie same",
+    "collectionNotSelected": "Należy wybrać kolekcję z listy"
   },
   "icons": {
     "accessibility": "człowiek",
@@ -106,13 +110,23 @@
     "dialog": {
       "create": "tworzenie kolekcji",
       "edit": "edycja kolekcji",
+      "share": "udostępnianie kolekcji",
       "deleteHeader": "usuwanie kolekcji",
-      "deleteMessage": "czy na pewno chcesz usunąć wskazaną kolekcję?"
+      "deleteMessage": "czy na pewno chcesz usunąć wskazaną kolekcję?",
+      "stopSharingHeader": "usuwanie kolekcji z udostępnionych",
+      "stopSharingMessage": "czy na pewno chcesz przerwać udostępnianie wskazanej kolekcji?",
+      "shareHeader": "udostępnianie kolekcji",
+      "shareMessage": "czy na pewno chcesz udostępnić wskazaną kolekcję?",
+      "saveHeader": "zapisywanie kolekcji",
+      "saveMessage": "wskazana kolekcja zostanie skopiowana i zapisana na Twoim koncie, czy na pewno chcesz kontynuować?"
     },
     "actions": {
       "CREATE": "kolekcja została utworzona pomyślnie",
       "EDIT": "kolekcja została zaktualizowana pomyślnie",
-      "DELETE": "kolekcja została usunięta pomyślnie"
+      "DELETE": "kolekcja została usunięta pomyślnie",
+      "SHARE": "kolekcja została udostępniona pomyślnie",
+      "SAVE": "kolekcja została zapisana pomyślnie",
+      "STOP_SHARING": "kolekcja została pomyślnie usunięta z listy udostępnianych"
     }
   },
   "cards": {
@@ -152,6 +166,7 @@
   },
   "messages": {
     "selectCollection": "Wybierz kolekcję z listy, aby przejrzeć dostępne karty lub rozpocząć naukę!",
+    "noCollections": "Brak kolekcji do wyświetlenia!",
     "noCardsToLearn": "W wybranej kolekcji nie ma obecnie kart do powtórki!",
     "noCardsToBrowse": "W wybranej kolekcji nie ma żadnych kart!",
     "selectRange": "wskaż zakres dat",
