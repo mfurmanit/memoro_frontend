@@ -32,8 +32,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(): void {
+    this.form.markAllAsTouched();
     if (this.form.valid) {
-      const { username, password } = this.form.value;
+      const {username, password} = this.form.value;
       this.authService.loginUser({username: username!, password: password!, redirectUrl: this.getRedirectUrl()});
     }
   }

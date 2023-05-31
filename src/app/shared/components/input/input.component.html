@@ -3,6 +3,7 @@
   <input #input
          matInput
          [id]="id ? id : controlName"
+         [autofocus]="autoFocus"
          [minlength]="minlength"
          [formControlName]="controlName"
          [name]="controlName"

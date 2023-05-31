@@ -24,6 +24,7 @@ export class InputComponent {
   @Input() minlength: string | number | null = null;
   @Input() readonly: boolean = false;
   @Input() hideCounter: boolean = false;
+  @Input() autoFocus: boolean = false;
   @Input() translatePlaceholder: boolean = true;
   @Input() interpolateParams?: Record<string, string | number>;
   @Input() fieldClass?: string | string[] | Set<string> | {

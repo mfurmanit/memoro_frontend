@@ -12,7 +12,7 @@
     "browsingMode": "tryb przeglądania",
     "viewedCards": "ilość wyświetlonych kart",
     "reviewedCards": "ilość nauczonych kart",
-    "reviewTime": "czas nauki (s)"
+    "reviewTime": "czas nauki"
   },
   "buttons": {
     "login": "zaloguj się",
@@ -72,7 +72,8 @@
     "matDatepickerParse": "Format daty jest niepoprawny",
     "weakPassword": "Hasło nie spełnia wymagań bezpieczeństwa",
     "notSame": "Hasła nie są takie same",
-    "collectionNotSelected": "Należy wybrać kolekcję z listy"
+    "collectionNotSelected": "Należy wybrać kolekcję z listy",
+    "invalidRange": "Wskazany zakres przekracza maskymalną wartość 7 dni"
   },
   "icons": {
     "accessibility": "człowiek",
@@ -171,6 +172,14 @@
     "noCardsToBrowse": "W wybranej kolekcji nie ma żadnych kart!",
     "selectRange": "wskaż zakres dat",
     "strongPassword": "hasło musi zawierać co najmniej 8 znaków, w tym co najmniej jedną małą i dużą literę, cyfrę oraz znak specjalny z zakresu #$!%&()*+,\\-./:;<=>?@[\\]^_`{|}~",
-    "registered": "rejestracja przebiegła pomyślnie, sprawdź swój e-mail w celu aktywacji konta"
+    "registered": "rejestracja przebiegła pomyślnie, sprawdź swój e-mail w celu aktywacji konta",
+    "sessionExpired": "sesja wygasła"
+  },
+  "pagination": {
+    "firstPageLabel": "Pierwsza strona",
+    "itemsPerPageLabel": "Max wierszy na stronie",
+    "lastPageLabel": "Ostatnia strona",
+    "nextPageLabel": "Następna strona",
+    "previousPageLabel": "Poprzednia strona"
   }
 }

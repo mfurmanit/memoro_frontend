@@ -1,6 +1,8 @@
 import { ChartOptions } from 'chart.js';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartsConfig } from '@models/charts-config';
+import { formatDuration } from 'date-fns';
+import { pl } from 'date-fns/locale';
 
 const chartPlugins = [
   DataLabelsPlugin
@@ -48,6 +50,30 @@ const pieChartOptions: ChartOptions = {
       bottom: 120
     }
   },
+  plugins: {
+    legend: {
+      display: true,
+    },
+    tooltip: {
+      callbacks: {
+        label: function (context) {
+          const index = context.dataIndex;
+          const dataset = context.dataset;
+          const currentValue = Number(dataset.data[index]);
+
+          const hours = Math.floor(currentValue / 3600);
+          const minutes = Math.floor(currentValue % 3600 / 60);
+          const seconds = Math.floor(currentValue % 3600 % 60);
+
+          return formatDuration({
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds
+          }, {delimiter: ', ', locale: pl});
+        }
+      }
+    }
+  },
   maintainAspectRatio: false,
 };
 
@@ -60,7 +86,7 @@ export const lineChartColors = {
   ],
   pointBackgroundColor: 'rgb(248,138,29)',
   borderWidth: 1
-}
+};
 
 export const chartColors = {
   backgroundColor: [
@@ -97,7 +123,7 @@ export const chartsConfig: ChartsConfig = {
   },
   pie: {
     options: pieChartOptions,
-    plugins: chartPlugins,
+    plugins: [],
     type: 'pie',
     title: 'reviewTime'
   },

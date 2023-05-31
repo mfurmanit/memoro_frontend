@@ -15,10 +15,12 @@
     flex-wrap: wrap;
     width: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
 
     & .mat-list-item.mat-list-item-with-avatar {
       height: auto;
       flex: 1;
+      max-width: calc(100% - 40px);
       border-right: 1px solid black;
 
       & .mat-list-item-content {
@@ -79,8 +81,9 @@
 
 .list-item-container {
   height: auto;
-  width: 100%;
-  flex-wrap: wrap;
+  width: calc(100% - 20px);
   border: 1px solid black;
   margin: 10px;
+  display: flex;
+  justify-content: space-between;
 }

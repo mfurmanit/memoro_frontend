@@ -5,6 +5,9 @@
          [placeholder]="placeholder | translate | capitalize"
          [formControlName]="controlName"
          [matAutocomplete]="auto">
+  <button mat-button matSuffix mat-icon-button *ngIf="form.controls[controlName].value" (click)="clearValue()">
+    <mat-icon>close</mat-icon>
+  </button>
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
     <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
       <ng-container *ngIf="!template">{{option | map:displayFnName}}</ng-container>

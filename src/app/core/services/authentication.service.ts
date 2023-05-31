@@ -1,7 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, ReplaySubject, Subscription } from 'rxjs';
-import { filterNil } from '@others/operators';
 import { UserService } from './user.service';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -10,6 +9,7 @@ import { AuthenticationResult } from '../models/authentication-result';
 import { isNullOrUndefined } from '@others/helper-functions';
 import { HttpClient } from '@angular/common/http';
 import { SnackbarService } from '@services/snackbar.service';
+import { AutoLogoutService } from '@services/auto-logout.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,19 +21,12 @@ export class AuthenticationService implements OnDestroy {
   constructor(private router: Router,
               private http: HttpClient,
               private userService: UserService,
-              private snackbarService: SnackbarService) {
+              private snackbarService: SnackbarService,
+              private autoLogoutService: AutoLogoutService) {
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-  }
-
-  getUserContext(): Observable<User> {
-    return this.userContext.pipe(filterNil());
-  }
-
-  getNullableUserContext(): Observable<User | null> {
-    return this.userContext;
   }
 
   loginUser(data: LoginData): void {
@@ -63,6 +56,7 @@ export class AuthenticationService implements OnDestroy {
 
   clearUserContextAndSystemState(redirectPath: string = 'login'): void {
     this.userContext.next(null);
+    this.autoLogoutService.clearTimer();
     this.router.navigateByUrl(redirectPath);
   }
 
@@ -82,6 +76,7 @@ export class AuthenticationService implements OnDestroy {
   private setUserContextAndSystemState(result: AuthenticationResult): void {
     const user = result.user;
     this.userContext.next(user);
+    this.autoLogoutService.initTimer(this);
 
     if (!isNullOrUndefined(result.redirectUrl)) this.router.navigateByUrl(result.redirectUrl);
   }
