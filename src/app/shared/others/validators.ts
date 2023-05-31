@@ -1,5 +1,7 @@
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { isEmpty, isObject } from 'lodash-es';
+import { isNullOrUndefined } from '@others/helper-functions';
+import { differenceInDays } from 'date-fns';
 
 export const selectedValidator = (error: string, required: boolean = true): ValidatorFn => (control: AbstractControl): ValidationErrors | null => {
   if (isEmpty(control.value) && !required) return null;
@@ -27,6 +29,25 @@ export const passwordsValidator: ValidatorFn = (control: AbstractControl): Valid
   confirmPassword.setErrors(Object.values(confirmPasswordErrors).filter(Boolean).length ? confirmPasswordErrors : null);
 
   return !passwordErrors.notSame ? null : {notSame: true};
+};
+
+export const dateRangeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const from = control.get('from');
+  const to = control.get('to');
+
+  if (isNullOrUndefined(from) || isNullOrUndefined(to))
+    return null;
+
+  const fromDate = new Date(from.value);
+  const toDate = new Date(to.value);
+
+  const diffInDays = differenceInDays(toDate, fromDate);
+  const error = diffInDays < 0 || diffInDays > 6;
+
+  if (error) from.setErrors({invalidRange: true});
+  else from.setErrors(null);
+
+  return !error ? null : {invalidRange: true};
 };
 
 export const strongPassword = (control: AbstractControl): boolean => {

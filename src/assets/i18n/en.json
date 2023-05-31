@@ -1,21 +1,185 @@
 {
   "titles": {
-    "main": "memory",
+    "main": "memoro",
     "homePage": "home page",
     "collections": "collections",
     "learning": "learning",
     "sharing": "sharing",
-    "favorite": "favourite",
-    "reports": "reports",
-    "userPanel": "user panel"
+    "favorite": "favorites",
+    "statistics": "statistics",
+    "userPanel": "user panel",
+    "learningMode": "learning mode",
+    "browsingMode": "browsing mode",
+    "viewedCards": "viewed cards",
+    "reviewedCards": "reviewed cards",
+    "reviewTime": "review time"
   },
   "buttons": {
-    "login": "login",
-    "logout": "logout",
-    "close": "close"
+    "login": "log in",
+    "register": "register",
+    "logout": "log out",
+    "close": "close",
+    "save": "save",
+    "cancel": "cancel",
+    "confirm": "confirm",
+    "createCollection": "create collection",
+    "shareCollection": "share collection",
+    "createCard": "create card",
+    "learn": "learn",
+    "browse": "browse",
+    "favorite": "favorite",
+    "all": "all"
   },
   "common": {
     "username": "username",
-    "password": "password"
+    "password": "password",
+    "confirmPassword": "confirm password",
+    "email": "email address",
+    "name": "name",
+    "firstName": "first name",
+    "surname": "surname",
+    "icon": "icon",
+    "front": "front",
+    "back": "back",
+    "favorite": "favorite",
+    "collection": "collection",
+    "value": "value",
+    "sort": "sort",
+    "side": "filter side",
+    "from": "from date",
+    "to": "to date"
+  },
+  "actions": {
+    "CREATE": "create",
+    "DELETE": "delete",
+    "EDIT": "edit",
+    "MARK_AS_FAVORITE": "mark as favorite",
+    "SHARE": "share",
+    "LEARN": "learn",
+    "CREATE_CARD": "create card",
+    "SAVE": "save",
+    "STOP_SHARING": "stop sharing"
+  },
+  "validations": {
+    "required": "This field is required",
+    "min": "Minimum value is {{min}}",
+    "max": "Maximum value is {{max}}",
+    "minlength": "Minimum length is {{requiredLength}} characters",
+    "maxlength": "Maximum length is {{requiredLength}} characters",
+    "email": "The entered email address is invalid",
+    "matStartDateInvalid": "Invalid start date",
+    "matEndDateInvalid": "Invalid end date",
+    "matDatepickerParse": "Invalid date format",
+    "weakPassword": "The password does not meet the security requirements",
+    "notSame": "The passwords do not match",
+    "collectionNotSelected": "You must select a collection from the list",
+    "invalidRange": "The specified range exceeds the maximum value of 7 days"
+  },
+  "icons": {
+    "accessibility": "accessibility",
+    "account_balance": "account balance",
+    "alarm": "alarm",
+    "album": "album",
+    "all_inclusive": "all inclusive",
+    "assignment": "assignment",
+    "attachment": "attachment",
+    "bluetooth": "bluetooth",
+    "book": "book",
+    "bookmark_border": "bookmark",
+    "brush": "brush",
+    "build": "build",
+    "call": "call",
+    "camera_alt": "camera",
+    "chat_bubble_outline": "chat",
+    "cloud_queue": "cloud",
+    "computer": "computer",
+    "directions_car": "car",
+    "flag": "flag",
+    "flight": "flight",
+    "folder_open": "folder",
+    "grade": "grade",
+    "home": "home",
+    "language": "language",
+    "people": "people",
+    "school": "school",
+    "search": "search",
+    "security": "security",
+    "settings": "settings",
+    "warning": "warning"
+  },
+  "collections": {
+    "dialog": {
+      "create": "creating collection",
+      "edit": "editing collection",
+      "share": "sharing collection",
+      "deleteHeader": "deleting collection",
+      "deleteMessage": "Are you sure you want to delete the selected collection?",
+      "stopSharingHeader": "removing collection from shared",
+      "stopSharingMessage": "Are you sure you want to stop sharing the selected collection?",
+      "shareHeader": "sharing collection",
+      "shareMessage": "Are you sure you want to share the selected collection?",
+      "saveHeader": "saving collection",
+      "saveMessage": "The selected collection will be copied and saved to your account. Are you sure you want to continue?"
+    },
+    "actions": {
+      "CREATE": "Collection created successfully",
+      "EDIT": "Collection updated successfully",
+      "DELETE": "Collection deleted successfully",
+      "SHARE": "Collection shared successfully",
+      "SAVE": "Collection saved successfully",
+      "STOP_SHARING": "Collection successfully removed from the shared list"
+    }
+  },
+  "cards": {
+    "dialog": {
+      "create": "creating card",
+      "edit": "editing card",
+      "deleteHeader": "deleting card",
+      "deleteMessage": "Are you sure you want to delete the selected card?"
+    },
+    "actions": {
+      "CREATE": "Card created successfully",
+      "EDIT": "Card updated successfully",
+      "DELETE": "Card deleted successfully",
+      "MARK_AS_FAVORITE": "Card marked as favorite"
+    }
+  },
+  "sortTypes": {
+    "NONE": "Disabled",
+    "NAME_ASC": "By name (ascending)",
+    "NAME_DESC": "By name (descending)",
+    "CREATED_DATE_ASC": "By creation date (ascending)",
+    "CREATED_DATE_DESC": "By creation date (descending)",
+    "FRONT_ASC": "By front (ascending)",
+    "FRONT_DESC": "By front (descending)",
+    "BACK_ASC": "By back (ascending)",
+    "BACK_DESC": "By back (descending)"
+  },
+  "sides": {
+    "FRONT": "Front",
+    "BACK": "Back"
+  },
+  "answers": {
+    "AGAIN": "AGAIN",
+    "HARD": "HARD",
+    "GOOD": "GOOD",
+    "EASY": "EASY"
+  },
+  "messages": {
+    "selectCollection": "Select a collection from the list to view available cards or start learning!",
+    "noCollections": "No collections to display!",
+    "noCardsToLearn": "There are currently no cards to review in the selected collection!",
+    "noCardsToBrowse": "There are no cards in the selected collection!",
+    "selectRange": "Select date range",
+    "strongPassword": "The password must contain at least 8 characters, including at least one uppercase and lowercase letter, a digit, and a special character from #$!%&()*+,\\-./:;<=>?@[\\]^_`{|}~",
+    "registered": "Registration was successful. Please check your email for account activation.",
+    "sessionExpired": "Session expired"
+  },
+  "pagination": {
+    "firstPageLabel": "First page",
+    "itemsPerPageLabel": "Max rows per page",
+    "lastPageLabel": "Last page",
+    "nextPageLabel": "Next page",
+    "previousPageLabel": "Previous page"
   }
 }

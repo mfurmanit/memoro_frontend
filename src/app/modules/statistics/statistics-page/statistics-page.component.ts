@@ -13,6 +13,7 @@ import { formatDateForBackend, getSortedData, isNonNullable, isNullOrUndefined }
 import { ChartsConfig } from '@models/charts-config';
 import { chartColors, chartsConfig, lineChartColors } from '@others/charts';
 import { StatisticsResponse } from '@models/statistics-response';
+import { dateRangeValidator } from '@others/validators';
 
 @Component({
   selector: 'app-statistics',
@@ -27,7 +28,7 @@ export class StatisticsPageComponent extends BaseComponent implements OnInit {
     from: new FormControl<Date>(new Date(), Validators.required),
     to: new FormControl<Date>(new Date(), Validators.required),
     collection: new FormControl<CardCollection | null>(null)
-  });
+  }, {validators: dateRangeValidator});
 
   public chartsConfig: ChartsConfig = chartsConfig;
 
@@ -107,7 +108,7 @@ export class StatisticsPageComponent extends BaseComponent implements OnInit {
       this.subscriptions.add(
         this.form.valueChanges.pipe(
           auditTime(0),
-          filter(({from, to}) => isNonNullable(from) && isNonNullable(to)),
+          filter(({from, to}) => isNonNullable(from) && isNonNullable(to) && this.form.valid),
         ).subscribe(({from, to, collection}) =>
           this.reloadCharts({from: formatDateForBackend(from!), to: formatDateForBackend(to!)}, collection?.id)
         )

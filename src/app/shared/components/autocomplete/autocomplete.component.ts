@@ -47,6 +47,10 @@ export class AutocompleteComponent<T> extends SelectComponent<T> implements OnIn
       );
   }
 
+  clearValue() {
+    this.form.controls[this.controlName].setValue('');
+  }
+
   private filterSimpleValues(search: string): Observable<T[]> {
     if (!this.values) return of([]);
     const filterValue = search?.toString().toLowerCase();

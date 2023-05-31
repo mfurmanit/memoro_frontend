@@ -54,7 +54,7 @@ export class LearningPageComponent extends BaseComponent implements OnInit {
       .set('page', '0')
       .set('size', '20');
 
-    if (!isNullOrUndefined(search)) params = params.append('value', search);
+    if (!isNullOrUndefined(search)) params = params.set('value', search);
 
     return params;
   }
@@ -70,16 +70,15 @@ export class LearningPageComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.getCollectionObservable().subscribe(collection => {
         if (isCardCollection(collection)) {
-          this.collectionId = collection.id;
-          if (this.mode !== LearningMode.LEARNING) this.changeState(this.getSort());
-        } else this.collectionId = null;
+          this.changeState(collection.id, this.getSort());
+        } else this.resetState();
       })
     );
   }
 
   private listenForSortChanges(): void {
     this.subscriptions.add(
-      this.getSortObservable().subscribe(sort => this.changeState(sort))
+      this.getSortObservable().subscribe(sort => this.changeState(this.collectionId, sort))
     );
   }
 
@@ -103,18 +102,27 @@ export class LearningPageComponent extends BaseComponent implements OnInit {
     else return SortType.NONE;
   }
 
-  private changeState(sort: SortType = SortType.NONE): void {
+  private changeState(collectionId: string | null, sort: SortType = SortType.NONE): void {
     if (this.mode === LearningMode.LEARNING)
-      this.subscriptions.add(this.learningService.stop().subscribe(() => this.updateState(sort)));
-    else this.updateState(sort);
+      this.subscriptions.add(this.learningService.stop().subscribe(() => this.updateState(collectionId, sort)));
+    else this.updateState(collectionId, sort);
   }
 
-  private updateState(sort: SortType = SortType.NONE): void {
+  private updateState(collectionId: string | null, sort: SortType = SortType.NONE): void {
     this.mode = LearningMode.BROWSING;
+    this.collectionId = collectionId;
     if (!isNullOrUndefined(this.collectionId)) {
       this.state = {
         sort, collectionId: this.collectionId
       };
     }
+  }
+
+  private resetState(): void {
+    this.collectionId = null;
+    this.state = undefined;
+    if (this.mode === LearningMode.LEARNING)
+      this.subscriptions.add(this.learningService.stop().subscribe());
+    this.mode = LearningMode.NONE;
   }
 }
