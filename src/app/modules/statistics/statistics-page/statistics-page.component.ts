@@ -84,8 +84,6 @@ export class StatisticsPageComponent extends BaseComponent implements OnInit {
   private prepareLineData(response: StatisticsResponse): void {
     const {labels, data} = getSortedData(response.reviewedCards);
 
-    console.log(labels, data);
-
     this.chartsConfig['line'].data = {
       labels: labels,
       datasets: [
@@ -98,8 +96,6 @@ export class StatisticsPageComponent extends BaseComponent implements OnInit {
 
   private preparePieData(response: StatisticsResponse): void {
     const {labels, data} = getSortedData(response.reviewTimes);
-    // const {labels, data} = getSortedData(a);
-    // console.log(labels, data);
 
     this.chartsConfig['pie'].data = {
       labels,

@@ -58,7 +58,6 @@ export class AutoLogoutService implements OnDestroy {
     const requestDiff: number = currentTime - lastRequestTime;
     const requestTimeExceeded: boolean = requestDiff >= requestInterval; // Informacja, czy czas ostatniego żądania przekroczył interwał
 
-    console.log(requestTimeExceeded);
     if (requestTimeExceeded) this.logout();
   }
 

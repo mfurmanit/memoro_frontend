@@ -49,5 +49,3 @@ export class ErrorInterceptor implements HttpInterceptor {
     this.snackbarService.openSnackBar({message: 'messages.sessionExpired'});
   }
 }
-
-

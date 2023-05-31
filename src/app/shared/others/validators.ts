@@ -35,21 +35,19 @@ export const dateRangeValidator: ValidatorFn = (control: AbstractControl): Valid
   const from = control.get('from');
   const to = control.get('to');
 
-  if (isNullOrUndefined(from) || isNullOrUndefined(to)) {
+  if (isNullOrUndefined(from) || isNullOrUndefined(to))
     return null;
-  }
 
   const fromDate = new Date(from.value);
   const toDate = new Date(to.value);
 
   const diffInDays = differenceInDays(toDate, fromDate);
-  console.log(diffInDays);
-  const notError = diffInDays >= 0 && diffInDays <= 6;
+  const error = diffInDays < 0 || diffInDays > 6;
 
-  if (!notError) from.setErrors({invalidRange: true});
+  if (error) from.setErrors({invalidRange: true});
   else from.setErrors(null);
 
-  return notError ? null : { invalidRange: true };
+  return !error ? null : {invalidRange: true};
 };
 
 export const strongPassword = (control: AbstractControl): boolean => {
