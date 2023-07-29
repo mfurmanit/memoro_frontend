@@ -11,11 +11,12 @@ import { InputComponent } from '@components/input/input.component';
 export class SelectComponent<T> extends InputComponent implements OnInit {
   @Input() displayFnName!: string;
   @Input() compareWith?: keyof T;
-  @Input() values?: any[];
+  @Input() values?: T[];
   @Input() multiple: boolean = false;
-  @Input() template: TemplateRef<any> | null = null;
-  @Input() triggerTemplate: TemplateRef<any> | null = null;
-  @Output() readonly selectionChanged: EventEmitter<MatSelectChange> = new EventEmitter<MatSelectChange>();
+  @Input() template: TemplateRef<T> | null = null;
+  @Input() triggerTemplate: TemplateRef<T> | null = null;
+  @Output() readonly selectionChanged: EventEmitter<MatSelectChange> =
+    new EventEmitter<MatSelectChange>();
   comparator: (first: T, second: T) => boolean = () => false;
 
   constructor() {

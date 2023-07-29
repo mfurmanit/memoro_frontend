@@ -39,18 +39,18 @@
   overflow: hidden;
 }
 
-.front {
-  transform: rotateY(0deg);
+.shared {
   background-color: #FFF;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+.front {
+  transform: rotateY(0deg);
+}
+
 .back {
   transform: rotateY(-180deg);
-  background-color: #FFF;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .flashcard.active .front {

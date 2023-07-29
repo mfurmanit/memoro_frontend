@@ -47,6 +47,11 @@
   <ng-container *ngIf="(cards$ | async) as page">
     <ng-container *ngIf="page?.content as cards">
       <ng-container *ngIf="(cards || []).length > 0; else noData">
+
+        <mat-card class="m-2 text-center message">
+          {{cards[0].collectionName}}
+        </mat-card>
+
         <mat-nav-list [disableRipple]="true" [disabled]="isShared">
           <ng-container *ngFor="let element of $any(cards)">
             <div #container [@fadeIn]="container" class="d-flex flex-row list-item-container">
