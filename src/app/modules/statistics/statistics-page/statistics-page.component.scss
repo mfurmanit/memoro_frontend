@@ -10,6 +10,7 @@
 
 .charts-container {
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .inputs {
@@ -18,8 +19,4 @@
   margin: 0 auto;
   border: 2px solid mat.mat-color($my-app-primary);
   padding: 1.5rem 1rem 1rem;
-}
-
-.pie-margin {
-  margin-bottom: 140px;
 }

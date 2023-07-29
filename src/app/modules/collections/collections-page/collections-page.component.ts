@@ -87,8 +87,12 @@ export class CollectionsPageComponent extends CrudHandler<CardCollection> implem
   private initListeners(): void {
     if (!isNullOrUndefined(this.form))
       this.subscriptions.add(
-        combineLatest([this.getValueObservable(), this.getSortObservable()])
-          .subscribe(([value, sort]) => this.loadCollections(sort, value))
+        combineLatest([
+          this.getValueObservable(), this.getSortObservable()
+        ])
+          .subscribe(
+            ([value, sort]) => this.loadCollections(sort, value)
+          )
       );
   }
 

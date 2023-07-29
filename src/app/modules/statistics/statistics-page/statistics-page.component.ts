@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { StatisticsService } from '@services/statistics.service';
 import { BaseComponent } from '@components/base/base.component';
 import { BaseChartDirective } from 'ng2-charts';
@@ -20,7 +20,10 @@ import { dateRangeValidator } from '@others/validators';
   templateUrl: './statistics-page.component.html',
   styleUrls: ['./statistics-page.component.scss']
 })
-export class StatisticsPageComponent extends BaseComponent implements OnInit {
+export class StatisticsPageComponent extends BaseComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('inputsContainer', {read: ElementRef}) inputsContainer: ElementRef | undefined;
+  @ViewChild('chartsContainer') chartsContainer: ElementRef | undefined;
 
   @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective> | undefined;
 
@@ -40,6 +43,20 @@ export class StatisticsPageComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.getCollections = this.getCollections.bind(this);
     this.initListeners();
+  }
+
+  ngAfterViewInit() {
+    this.adjustChartContainerHeight();
+    window.addEventListener('resize', this.adjustChartContainerHeight.bind(this));
+  }
+
+  adjustChartContainerHeight() {
+    if (!isNullOrUndefined(this.inputsContainer) && !isNullOrUndefined(this.chartsContainer)) {
+      const inputsHeight = this.inputsContainer.nativeElement.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      this.chartsContainer.nativeElement.style.height = `calc(${viewportHeight - inputsHeight - 64}px - 2rem)`;
+      // 64px is the size of navbar, 2rem is padding
+    }
   }
 
   getCollections(value: string): Observable<CardCollection[]> {

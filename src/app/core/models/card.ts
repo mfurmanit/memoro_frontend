@@ -5,4 +5,5 @@ export interface Card extends BaseModel {
   back: string;
   favorite: boolean;
   collectionId: string;
+  collectionName: string;
 }

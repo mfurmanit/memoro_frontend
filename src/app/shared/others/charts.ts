@@ -47,7 +47,7 @@ const pieChartOptions: ChartOptions = {
   layout: {
     padding: {
       top: 20,
-      bottom: 120
+      bottom: 40
     }
   },
   plugins: {
