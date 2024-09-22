@@ -1,27 +1,45 @@
+<img  width="150" height="150" src="readme/icon.png" alt="Memoro icon">
+
 # Memoro
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
+Project carried out for master's degree. 
+Web application (frontend side) written in Angular 14.
 
-## Development server
+Main object was to implement simple application to support learning and effective memorization of information.
+The SM-2 (SuperMemo2) algorithm was used for this purpose.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Description
 
-## Code scaffolding
+Memoro is an application that enables much more effective learning using techniques and tools such as memory information extraction, forgetting curve and spaced repetition. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+It works on the basis of fiches. Users can create their own collections and fiches for learning. 
 
-## Build
+The SM2 algorithm determines the optimal repetition time maximizing learning results. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+There are also graphs / statistics (e.g. from the number of cards displayed / learned) and also functionality to share collections with other users.
 
-## Running unit tests
+## Technological stack
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Angular** and **TypeScript** - core technologies
 
-## Running end-to-end tests
+**RxJS** - library for reactive programming using Observables
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+**n2-charts** - library used to display charts and statistics
 
-## Further help
+**Angular Material** and **Bootstrap** - libraries used for styling
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Images
+<details>
+<summary>
+  Expand to show images!
+</summary>
+  <img src="readme/collections.png"/> <br />
+  <hr style="margin-top: 20px; margin-bottom: 20px;"/>
+  <img src="readme/creating_collection.png"/> <br />
+  <hr style="margin-top: 20px; margin-bottom: 20px;"/>
+  <img src="readme/filter.png"/> <br />
+  <hr style="margin-top: 20px; margin-bottom: 20px;"/>
+  <img src="readme/learning.png"/> <br />
+  <hr style="margin-top: 20px; margin-bottom: 20px;"/>
+  <img src="readme/statistics.png"/> <br />
+</details>
